@@ -25,7 +25,12 @@ for (let i = 0; i < 180; i++) {
     colors.push(aa);
 };
 
-const SimpleMap: React.FC = () => {
+
+interface IMyComponentState {
+    onCountrySelected: Function
+}
+
+const SimpleMap: React.FC<IMyComponentState> = ({ onCountrySelected }) => {
 
     const [state, setState] = useState({
         detail: false,
@@ -45,7 +50,7 @@ const SimpleMap: React.FC = () => {
         // const path = geoPath().projection(projection())
         // const centroid = projection().invert(path.centroid(geography))
         const { detail } = state;
-        console.log(geography, 'click')
+        console.log(geography, 'click');
         setState({
             paths: geoPaths[0],
             center: [0, 0] as Point,
@@ -54,51 +59,50 @@ const SimpleMap: React.FC = () => {
             detail: !detail,
             countrySelected: geography.properties.ISO_A2
         });
+
+        if (onCountrySelected)
+            onCountrySelected(geography.properties.NAME)
     };
 
     return (
         <React.Fragment>
-            {"Click on the map!"}
-            <div style={{ height: '500px', width: '500px' }}>
-                <ComposableMap style={{ width: "100%", height: "auto" }}>
-                    <ZoomableGroup center={state.center} zoom={state.zoom}>
-                        <Geographies geography={state.paths} disableOptimization>
-                            {(geos: any, proj: any) =>
-                                geos.map((geo: any, i: any) => {
-
-                                    console.log(geo)
-                                    return (
-                                        <Geography
-                                            key={
-                                                (geo.properties.ISO_A3 || geo.properties.GID_1) + i
+            <ComposableMap style={{ width: "100%", height: "auto" }}>
+                <ZoomableGroup center={state.center} zoom={state.zoom}>
+                    <Geographies geography={state.paths} disableOptimization>
+                        {(geos: any, proj: any) =>
+                            geos.map((geo: any, i: any) => {
+                                // console.log(geo)
+                                return (
+                                    <Geography
+                                        key={
+                                            (geo.properties.ISO_A3 || geo.properties.GID_1) + i
+                                        }
+                                        cacheId={
+                                            (geo.properties.ISO_A3 || geo.properties.GID_1) + i
+                                        }
+                                        geography={geo}
+                                        projection={proj}
+                                        onClick={switchPaths}
+                                        style={{
+                                            default: {
+                                                fill: state.countrySelected === geo.properties.ISO_A2 ? 'green' : colors[i],
+                                                outline: "none"
+                                            },
+                                            hover: {
+                                                fill: 'green',
+                                                outline: "none"
+                                            },
+                                            pressed: {
+                                                outline: "none"
                                             }
-                                            cacheId={
-                                                (geo.properties.ISO_A3 || geo.properties.GID_1) + i
-                                            }
-                                            geography={geo}
-                                            projection={proj}
-                                            onClick={switchPaths}
-                                            style={{
-                                                default: {
-                                                    fill: state.countrySelected === geo.properties.ISO_A2 ? 'green' : colors[i],
-                                                    outline: "none"
-                                                },
-                                                hover: {
-                                                    fill: 'green',
-                                                    outline: "none"
-                                                },
-                                                pressed: {
-                                                    outline: "none"
-                                                }
-                                            }}
-                                        />
-                                    )
-                                })
-                            }
-                        </Geographies>
-                    </ZoomableGroup>
-                </ComposableMap>
-            </div>
+                                        }}
+                                    />
+                                )
+                            })
+                        }
+                    </Geographies>
+                </ZoomableGroup>
+            </ComposableMap>
         </React.Fragment>
     );
 }
