@@ -23,7 +23,7 @@ const App: React.FC = () => {
     <div className="App">
       <div>
         <div style={{ height: '80vh', width: '50vw', padding: 20, float: "left" }}>
-          <SimpleMap onCountrySelected={countrySelected} setContent={setContent}></SimpleMap>
+          <SimpleMap countries={['IN', 'RU']} onCountrySelected={countrySelected} setContent={setContent}></SimpleMap>
           <ReactTooltip>
             <h1>{content.NAME}</h1>
             <h2>{content.POP_EST}</h2>

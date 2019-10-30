@@ -29,10 +29,11 @@ for (let i = 0; i < 180; i++) {
 
 interface IMyComponentState {
     onCountrySelected: Function,
-    setContent: Function
+    setContent: Function,
+    countries: any[]
 }
 
-const SimpleMap: React.FC<IMyComponentState> = ({ onCountrySelected, setContent }) => {
+const SimpleMap: React.FC<IMyComponentState> = ({ onCountrySelected, setContent, countries }) => {
     // const [content, setContent] = useState("");
 
     const [state, setState] = useState({
@@ -65,19 +66,39 @@ const SimpleMap: React.FC<IMyComponentState> = ({ onCountrySelected, setContent 
 
         if (onCountrySelected) {
             onCountrySelected(geography.properties.NAME)
-            // setContent(`${geography.properties.NAME}`)
         }
     };
+    console.log(countries)
+    const getCountryStyles = (geo: any, i: number) => {
+        const { NAME, ISO_A2 } = geo.properties;
+        let effectiveCountry = false;
+        console.log(NAME)
+        if (countries.find(c => c === ISO_A2))
+            effectiveCountry = true;
 
-    // useEffect(() => {
-    //     ReactTooltip.rebuild();
-    // }, [content])
+        let fillColor = effectiveCountry ? colors[i] : 'grey';
+
+        return {
+            default: {
+                fill: state.countrySelected === NAME ? 'green' : fillColor,
+                outline: "none"
+            },
+            hover: {
+                fill: 'green',
+                outline: "none"
+            },
+            pressed: {
+                outline: "none"
+            }
+        }
+
+    }
     return (
         <React.Fragment>
             <ComposableMap data-tip={state.countrySelected} showCenter={false} style={{ width: "100%", height: "auto" }}>
                 <ZoomableGroup center={state.center} zoom={1}>
                     <Geographies geography={state.paths} disableOptimization>
-                        {({ geographies }: any) =>
+                        {({ geographies, proj }: any) =>
                             geographies.map((geo: any, i: any) => {
                                 // console.log(geo)
                                 return (
@@ -89,7 +110,7 @@ const SimpleMap: React.FC<IMyComponentState> = ({ onCountrySelected, setContent 
                                             (geo.properties.ISO_A3 || geo.properties.GID_1) + i
                                         }
                                         geography={geo}
-                                        // projection={proj}
+                                        projection={proj}
                                         onMouseUp={(e) => switchPaths(e, geo, undefined)}
                                         onMouseEnter={() => {
                                             const { NAME, POP_EST } = geo.properties;
@@ -97,11 +118,12 @@ const SimpleMap: React.FC<IMyComponentState> = ({ onCountrySelected, setContent 
                                             setContent(geo.properties);
                                         }}
                                         onMouseLeave={() => {
-                                            setContent(geo.properties);
+                                            setContent({});
                                         }}
                                         style={{
                                             default: {
-                                                fill: state.countrySelected === geo.properties.ISO_A2 ? 'green' : colors[i],
+                                                fill: state.countrySelected === geo.properties.ISO_A2 ? 'green' : countries.find(c => c === geo.properties.ISO_A2) ? colors[i] : '#ece8e8',
+                                                // fill: 'green',
                                                 outline: "none"
                                             },
                                             hover: {
@@ -119,7 +141,6 @@ const SimpleMap: React.FC<IMyComponentState> = ({ onCountrySelected, setContent 
                     </Geographies>
                 </ZoomableGroup>
             </ComposableMap>
-            
         </React.Fragment >
     );
 }
