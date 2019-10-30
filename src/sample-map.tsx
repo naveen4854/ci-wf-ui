@@ -28,11 +28,12 @@ for (let i = 0; i < 180; i++) {
 
 
 interface IMyComponentState {
-    onCountrySelected: Function
+    onCountrySelected: Function,
+    setContent: Function
 }
 
-const SimpleMap: React.FC<IMyComponentState> = ({ onCountrySelected }) => {
-    const [content, setContent] = useState("");
+const SimpleMap: React.FC<IMyComponentState> = ({ onCountrySelected, setContent }) => {
+    // const [content, setContent] = useState("");
 
     const [state, setState] = useState({
         detail: false,
@@ -64,32 +65,16 @@ const SimpleMap: React.FC<IMyComponentState> = ({ onCountrySelected }) => {
 
         if (onCountrySelected) {
             onCountrySelected(geography.properties.NAME)
-            setContent(`${geography.properties.NAME}`)
+            // setContent(`${geography.properties.NAME}`)
         }
     };
 
-    const rounded = (num: any) => {
-        if (num > 1000000000) {
-            return Math.round(num / 100000000) / 10 + "Bn";
-        } else if (num > 1000000) {
-            return Math.round(num / 100000) / 10 + "M";
-        } else {
-            return Math.round(num / 100) / 10 + "K";
-        }
-    };
-
-    // const colors = ["red", "blue", "green", "black", "yellow"];
-    const handleCountryClick = (event: any) => {
-        // event.preventDefault();
-        // event.persist();
-        console.log(event);
-    };
-    useEffect(() => {
-        ReactTooltip.rebuild();
-    }, [content])
+    // useEffect(() => {
+    //     ReactTooltip.rebuild();
+    // }, [content])
     return (
         <React.Fragment>
-            <ComposableMap data-tip={content} showCenter={false} style={{ width: "100%", height: "auto" }}>
+            <ComposableMap data-tip={state.countrySelected} showCenter={false} style={{ width: "100%", height: "auto" }}>
                 <ZoomableGroup center={state.center} zoom={1}>
                     <Geographies geography={state.paths} disableOptimization>
                         {({ geographies }: any) =>
@@ -109,10 +94,10 @@ const SimpleMap: React.FC<IMyComponentState> = ({ onCountrySelected }) => {
                                         onMouseEnter={() => {
                                             const { NAME, POP_EST } = geo.properties;
                                             // console.log(setTooltipContent, `${NAME}`, 'enter')
-                                            setContent(`${NAME}`);
+                                            setContent(geo.properties);
                                         }}
                                         onMouseLeave={() => {
-                                            setContent("");
+                                            setContent(geo.properties);
                                         }}
                                         style={{
                                             default: {
@@ -134,7 +119,7 @@ const SimpleMap: React.FC<IMyComponentState> = ({ onCountrySelected }) => {
                     </Geographies>
                 </ZoomableGroup>
             </ComposableMap>
-            <ReactTooltip getContent={(dataTip: string) => <a>{dataTip} aaa</a>}>{content}</ReactTooltip>
+            
         </React.Fragment >
     );
 }
