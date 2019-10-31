@@ -8,7 +8,6 @@ interface TEST {
 const TableSample: React.FC<TEST> = ({ header }) => {
     return (
         <div>
-            <div>Project Details</div>
             <Table responsive bordered>
                 <thead>
                     <tr>

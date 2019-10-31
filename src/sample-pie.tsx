@@ -11,29 +11,35 @@ const data = {
     datasets: [{
         data: [300, 50, 100],
         backgroundColor: [
-            '#FF6384',
-            '#36A2EB',
-            '#FFCE56'
+            '#DD0014',
+            '#447733',
+            '#FFBF00'
         ],
         hoverBackgroundColor: [
-            '#FF6384',
-            '#36A2EB',
-            '#FFCE56'
+            '#DD0014',
+            '#447733',
+            '#FFBF00'
         ]
     }]
 };
 
 interface TEST {
-    header: string
+    selectedCountry: string
 }
 
 
-const PieSample: React.FC<TEST> = ({ header }) => {
+const PieSample: React.FC<TEST> = ({ selectedCountry }) => {
+    const header = selectedCountry && selectedCountry !== '' ? `${selectedCountry}  - Live Project Status` : 'Global - Live Project Status'
     return (
-        <div>
-            <h2>{header}</h2>
-            <Pie data={data} />
+        <div className="card" >
+            <div className="card-header">
+                {header}
+            </div>
+            <div className="card-body">
+                <Pie data={data} />
+            </div>
         </div>
+
     )
 }
 

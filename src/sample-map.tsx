@@ -68,7 +68,7 @@ const SimpleMap: React.FC<IMyComponentState> = ({ onCountrySelected, setContent,
             onCountrySelected(geography.properties.NAME)
         }
     };
-    console.log(countries)
+
     const getCountryStyles = (geo: any, i: number) => {
         const { NAME, ISO_A2 } = geo.properties;
         let effectiveCountry = false;
@@ -94,54 +94,63 @@ const SimpleMap: React.FC<IMyComponentState> = ({ onCountrySelected, setContent,
 
     }
     return (
-        <React.Fragment>
-            <ComposableMap data-tip={state.countrySelected} showCenter={false} style={{ width: "100%", height: "auto" }}>
-                <ZoomableGroup center={state.center} zoom={1}>
-                    <Geographies geography={state.paths} disableOptimization>
-                        {({ geographies, proj }: any) =>
-                            geographies.map((geo: any, i: any) => {
-                                // console.log(geo)
-                                return (
-                                    <Geography
-                                        key={
-                                            (geo.properties.ISO_A3 || geo.properties.GID_1) + i
+        <div className="card" >
+            <div className="card-body">
+                <ComposableMap data-tip={state.countrySelected} showCenter={false} style={{ width: "100%", height: "auto" }}>
+                    <ZoomableGroup center={state.center} zoom={1}>
+                        <Geographies geography={state.paths} disableOptimization>
+                            {({ geographies, proj }: any) =>
+                                geographies.map((geo: any, i: any) => {
+                                    const { NAME, ISO_A2 } = geo.properties;
+                                    let fillColor = '#ece8e8';
+                                    let statusColors = ['#99bbff', '#6666ff', '#0000cc']
+                                    const country = countries.find(c => c.id === ISO_A2)
+                                    if (country) {
+                                        fillColor = statusColors[country.status];
+                                    }
+                                    // console.log(geo)
+                                    const contryStyle = {
+                                        default: {
+                                            fill: fillColor,
+                                            outline: "none"
+                                        },
+                                        hover: {
+                                            fill: 'green',
+                                            outline: "none"
+                                        },
+                                        pressed: {
+                                            outline: "none"
                                         }
-                                        cacheId={
-                                            (geo.properties.ISO_A3 || geo.properties.GID_1) + i
-                                        }
-                                        geography={geo}
-                                        projection={proj}
-                                        onMouseUp={(e) => switchPaths(e, geo, undefined)}
-                                        onMouseEnter={() => {
-                                            const { NAME, POP_EST } = geo.properties;
-                                            // console.log(setTooltipContent, `${NAME}`, 'enter')
-                                            setContent(geo.properties);
-                                        }}
-                                        onMouseLeave={() => {
-                                            setContent({});
-                                        }}
-                                        style={{
-                                            default: {
-                                                fill: state.countrySelected === geo.properties.ISO_A2 ? 'green' : countries.find(c => c === geo.properties.ISO_A2) ? colors[i] : '#ece8e8',
-                                                // fill: 'green',
-                                                outline: "none"
-                                            },
-                                            hover: {
-                                                fill: 'green',
-                                                outline: "none"
-                                            },
-                                            pressed: {
-                                                outline: "none"
+                                    }
+                                    return (
+                                        <Geography
+                                            key={
+                                                (geo.properties.ISO_A3 || geo.properties.GID_1) + i
                                             }
-                                        }}
-                                    />
-                                )
-                            })
-                        }
-                    </Geographies>
-                </ZoomableGroup>
-            </ComposableMap>
-        </React.Fragment >
+                                            cacheId={
+                                                (geo.properties.ISO_A3 || geo.properties.GID_1) + i
+                                            }
+                                            geography={geo}
+                                            projection={proj}
+                                            onMouseUp={(e) => switchPaths(e, geo, undefined)}
+                                            onMouseEnter={() => {
+                                                const { NAME, POP_EST } = geo.properties;
+                                                // console.log(setTooltipContent, `${NAME}`, 'enter')
+                                                setContent(geo.properties);
+                                            }}
+                                            onMouseLeave={() => {
+                                                setContent({});
+                                            }}
+                                            style={contryStyle}
+                                        />
+                                    )
+                                })
+                            }
+                        </Geographies>
+                    </ZoomableGroup>
+                </ComposableMap>
+            </div>
+        </div>
     );
 }
 
