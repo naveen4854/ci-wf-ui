@@ -90,7 +90,7 @@ const TableSample: React.FC<TEST> = ({ header }) => {
                         }]
                     }} header={'Live Projects Info'} />
             </div>
-            <div className="col-12" >
+            <div className="col-12" style={{ marginTop: 20 }}>
                 <div className="card">
                     <div className="card-header">
                         {header}
@@ -107,11 +107,28 @@ const TableSample: React.FC<TEST> = ({ header }) => {
                             </thead>
                             <tbody>
                                 {
-                                    projects.map((prj, i) => <tr>
-                                        <td>Project Id {i}</td>
-                                        <td>ONL {i}</td>
-                                        <td>Test{i}</td>
-                                    </tr>)
+                                    projects.map((prj, i) => {
+                                        let statusColor = 'white';
+                                        let statusCode = Math.floor(Math.random() * 3);
+                                        console.log(statusCode, 'statusCode')
+                                        switch (statusCode) {
+                                            case 0:
+                                                statusColor = '#447733';
+                                                break;
+                                            case 1:
+                                                statusColor = '#FFBF00';
+                                                break;
+                                            case 2:
+                                                statusColor = '#DD0014';
+                                                break;
+                                        }
+                                        return <tr>
+                                            <td>Project Id {i}</td>
+                                            <td>ONL {i}</td>
+                                            <td>Test{i}</td>
+                                            <td ><div style={{ padding: 20, background: statusColor }}></div></td>
+                                        </tr>
+                                    })
                                 }
 
                             </tbody>
