@@ -19,13 +19,19 @@ const TableSample: React.FC<TEST> = ({ header }) => {
 
     return (
         header !== '' ? < div className="row" style={{ marginTop: 20 }}>
-            <div className="col-6" >
-                <div className="card" style={{height:438}}>
-                    <div className="card-header">
-                        {header}
+            <div className="col-8">
+                <div className="card">
+                    <div className="card-header dark-blue">
+                        <div className="row align-items-center">
+                            <div className="col">
+                                <h4 className="card-header-title">
+                                    {header} : Project Details
+                                </h4>
+                            </div>
+                        </div>
                     </div>
-                    <div className="card-body ">
-                        <Table responsive bordered>
+                    <div className="card-body">
+                        <Table style={{ marginTop: 10 }} responsive bordered>
                             <thead>
                                 <tr>
                                     <th>Survey Tool</th>
@@ -69,7 +75,7 @@ const TableSample: React.FC<TEST> = ({ header }) => {
                     </div>
                 </div>
             </div>
-            <div className="col-6">
+            <div className="col-4">
                 <PieSample
                     data={{
                         labels: [
@@ -93,53 +99,60 @@ const TableSample: React.FC<TEST> = ({ header }) => {
                     }} header={'Live Projects Info'} />
             </div>
             {
-            showProjectDetails && <div className="col-12" style={{ marginTop: 20 }}>
-                <div className="card">
-                    <div className="card-header">
-                        {header}
-                    </div>
-                    <div className="card-body ">
-                        <Table responsive bordered>
-                            <thead>
-                                <tr>
-                                    <th>Project Id</th>
-                                    <th>ONL ID / STG ID</th>
-                                    <th>Project Name</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {
-                                    projects.map((prj, i) => {
-                                        let statusColor = 'white';
-                                        let statusCode = Math.floor(Math.random() * 3);
-                                        console.log(statusCode, 'statusCode')
-                                        switch (statusCode) {
-                                            case 0:
-                                                statusColor = '#447733';
-                                                break;
-                                            case 1:
-                                                statusColor = '#FFBF00';
-                                                break;
-                                            case 2:
-                                                statusColor = '#DD0014';
-                                                break;
-                                        }
-                                        return <tr>
-                                            <td>Project Id {i}</td>
-                                            <td>ONL {i}</td>
-                                            <td>Test{i}</td>
-                                            <td ><div style={{ padding: 20, background: statusColor }}></div></td>
-                                        </tr>
-                                    })
-                                }
+                showProjectDetails && <div className="col-12" style={{ marginTop: 20 }}>
+                    <div className="card">
+                        <div className="card-header dark-blue">
+                            <div className="row align-items-center">
+                                <div className="col">
+                                    <h4 className="card-header-title">
+                                        {header}
+                                    </h4>
+                                </div>
 
-                            </tbody>
-                        </Table>
+                            </div>
+                        </div>
+                        <div className="card-body ">
+                            <Table style={{ marginTop: 10 }} responsive bordered>
+                                <thead>
+                                    <tr>
+                                        <th>Project Id</th>
+                                        <th>ONL ID / STG ID</th>
+                                        <th>Project Name</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        projects.map((prj, i) => {
+                                            let statusColor = 'white';
+                                            let statusCode = Math.floor(Math.random() * 3);
+                                            console.log(statusCode, 'statusCode')
+                                            switch (statusCode) {
+                                                case 0:
+                                                    statusColor = '#447733';
+                                                    break;
+                                                case 1:
+                                                    statusColor = '#FFBF00';
+                                                    break;
+                                                case 2:
+                                                    statusColor = '#DD0014';
+                                                    break;
+                                            }
+                                            return <tr>
+                                                <td>Project Id {i}</td>
+                                                <td>ONL {i}</td>
+                                                <td>Test{i}</td>
+                                                <td ><div style={{ padding: 20, background: statusColor }}></div></td>
+                                            </tr>
+                                        })
+                                    }
+
+                                </tbody>
+                            </Table>
+                        </div>
                     </div>
+
                 </div>
-               
-            </div>
             }
         </div > : <React.Fragment></React.Fragment>
     )

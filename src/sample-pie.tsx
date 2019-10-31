@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './App.css';
 import { Pie } from 'react-chartjs-2';
 
 
@@ -11,12 +10,14 @@ interface TEST {
 
 const PieSample: React.FC<TEST> = ({ header, data }) => {
     return (
-        <div className="card">
-            <div className="card-header">
-                {header}
-            </div>
-            <div className="card-body">
-                <Pie data={data} />
+        <div className="chart-block">
+            <div className="graph-chart">
+                <h4>
+                    {header}
+                </h4>
+                <div className="chart-data">
+                    <Pie data={data} />
+                </div>
             </div>
         </div>
 

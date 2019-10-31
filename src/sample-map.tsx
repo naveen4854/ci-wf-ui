@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
-
 import {
     ComposableMap,
     Geographies,
@@ -13,7 +11,7 @@ import { geoPath } from "d3-geo";
 import ReactTooltip from "react-tooltip";
 // import { geoTimes } from "d3-geo-projection";
 
-const geoPaths = ["/world.json", "/ch.json"];
+const geoPaths = ["/world-10m.json", "/world.json", "/ch.json"];
 
 const getRandomInt = (min: number, max: number) =>
     Math.floor(Math.random() * (max - min + 1) + min);
@@ -96,9 +94,9 @@ const SimpleMap: React.FC<IMyComponentState> = ({ onCountrySelected, setContent,
     return (
         <div className="card" >
             <div className="card-body">
-                <ComposableMap data-tip={state.countrySelected} showCenter={false} width={900}
-  height={500}>
-                    <ZoomableGroup center={state.center} zoom={1}>
+                <ComposableMap projection="geoMercator" data-tip={state.countrySelected} showCenter={false} width={900}
+                    height={500}>
+                    <ZoomableGroup center={state.center} zoom={0.8}>
                         <Geographies geography={state.paths} disableOptimization>
                             {({ geographies, proj }: any) =>
                                 geographies.map((geo: any, i: any) => {

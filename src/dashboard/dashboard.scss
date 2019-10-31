@@ -1,0 +1,198 @@
+@import '../assets/css/_colors.scss';
+
+.right-content-block{
+    color: #757677;
+    .card {
+        margin-bottom: 20px;   
+    }
+}
+.mt-90{
+    margin-top: 80px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 40px;
+}
+
+.card-header{
+    // background-color: transparent;
+    color: $white;
+    font-size: 16px;
+    font-weight: bold;
+    border: 0px;
+    padding: 10px 20px 0px;
+}
+h4.card-header-title, .card-body ul li h4{
+    font-size: 15px;
+}
+.card-body{
+    border-top: 1px solid #edf2f9;
+    padding-top: 0px;
+    ul {
+        margin: 0px;
+        padding: 0px; 
+
+        li{
+            display: block;
+            border-bottom: 1px solid #edf2f9;
+            padding: 10px 0;
+
+            p{
+                margin: 0px;
+                padding: 0px;
+            }
+        }
+    }
+} 
+
+.filter-block{
+    border: 1px solid #e3ebf6;
+    background: $white;
+    padding: 5px;
+    margin: 0 0 20px 0;
+    overflow: auto;
+
+    label{
+        font-weight: bold;
+        margin-right: 5px;
+    }
+    select{
+        margin-right: 15px;
+        padding: 0px;
+        height: 30px;
+        border-radius: 2px;
+        font-size: 13px;
+    }
+    select:last-child{
+        margin-right: 0px;
+    }
+}
+
+
+.card {
+    margin-bottom: 20px;   
+    border-radius: 0px; 
+}
+
+.card-header:first-child {
+    border-radius: 0px;
+}
+
+.left-content-block{
+    .sub-header{
+        margin-bottom: 20px;
+        .card {
+            border-radius: 0px;
+            border: 0px;
+            padding: 0px;
+            .card-body {
+                border-top:0px;
+                padding: 15px;
+                height: 95px;
+
+                .circle{
+                    height: 50px;
+                    width: 50px;
+                    padding: 8px 0;
+                    text-align: center;
+                    border-radius: 50%;
+                    color: $white;
+                    font-size: 25px;
+                    margin-top: 5px;
+                }
+               .title-mg {
+                    margin-bottom: 2px;
+                    margin-top: 7px;
+                }
+            }
+        }
+    }
+    .text-muted {
+        color: #a7abb1!important;
+    }
+    
+    .card-title{
+        font-size: 10px;
+    }
+    .h2 {
+        font-size: 20px;
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+    }
+    .progress-sm {
+        height: .25rem;
+    }
+    .progress {
+        display: flex;
+        overflow: hidden;
+        font-size: .70313rem;
+        background-color: #edf2f9;
+        border-radius: 200px;
+    }
+
+    .chart-block{
+        margin-top: 30px;
+        .graph-chart{
+            background: $white;
+            padding: 20px 25px;
+
+            h4{
+                font-size: 18px;
+                border-bottom: 2px solid rgb(248, 248, 248);
+                padding-bottom: 15px;
+                color: #757677;
+                a{
+                    color: #757677;
+                }
+                i{ 
+                    font-size: 12px;
+                    float: right;
+                    margin-top: 5px;
+                }
+            }
+        }
+    }
+}
+
+.chart-block{
+    // margin-top: 30px;
+    .graph-chart{
+        background: $white;
+        padding: 20px 25px;
+
+        h4{
+            font-size: 18px;
+            border-bottom: 2px solid rgb(248, 248, 248);
+            padding-bottom: 15px;
+            color: #757677;
+            a{
+                color: #757677;
+            }
+            i{ 
+                font-size: 12px;
+                float: right;
+                margin-top: 5px;
+            }
+        }
+    }
+}
+.align-items-center {
+    align-items: center!important;
+}
+h6.text-uppercase {
+    letter-spacing: .08em;
+}
+.text-uppercase {
+    text-transform: uppercase!important;
+}
+.badge {
+    vertical-align: middle;
+}
+.badge-soft-success {
+    color: $light-green;
+    background-color: #ccf7e5;
+}
+.small{
+    vertical-align: super;
+    font-weight: 500;
+}
