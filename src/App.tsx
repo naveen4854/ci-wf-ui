@@ -34,19 +34,19 @@ const App: React.FC = () => {
     console.log(countryName, 'countryName')
   }
   return (
-    <div className="App">
-      <div style={{ backgroundColor: '#ece8e8' }}>
-        <div style={{ height: '80vh', width: '50vw', padding: 20, float: "left" }}>
+    <div className="container-fluid" style={{ paddingTop: 20,  paddingBottom: 20, backgroundColor: '#ece8e8' }}>
+      <div className='row'>
+        <div className='col-6'>
           <SimpleMap countries={state.countries} onCountrySelected={countrySelected} setContent={setContent}></SimpleMap>
           <ReactTooltip>
-            <h1>{content.NAME}</h1>
-            <h2>{content.POP_EST}</h2>
+            <a>{content.NAME}</a>
+            {/* <h2>{content.POP_EST}</h2> */}
           </ReactTooltip>
         </div>
-        <div style={{ height: '50vh', width: '45vw', padding: 20, float: "right" }}>
+        <div className='col-6'>
           <PieSample selectedCountry={state.selectedCountry} />
         </div>
-        <div style={{ margin: '50px' }}>
+        <div className='col-6'>
           <TableSample header={state.selectedCountry} />
         </div>
       </div>
