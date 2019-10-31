@@ -9,12 +9,14 @@ interface TEST {
 const TableSample: React.FC<TEST> = ({ header }) => {
     const [projects, setProjects] = useState([] as any[]);
     const [showProjectDetails, setShowProjectDetails] = useState(false);
+    const [projectDetailsHeader, setprojectDetailsHeader] = useState('');
 
-    const handleClick = (e: any, num: number) => {
+    const handleClick = (e: any, num: number, title: string) => {
         e.preventDefault();
         const newArr = Array(num).fill(0);
         setProjects([...newArr]);
         setShowProjectDetails(true);
+        setprojectDetailsHeader(title);
     }
 
     return (
@@ -45,23 +47,23 @@ const TableSample: React.FC<TEST> = ({ header }) => {
                                 <tr>
                                     <td>Survey To Go</td>
                                     <td>125</td>
-                                    <td><a href='' onClick={(e) => handleClick(e, 30)}>30</a></td>
-                                    <td><a href='' onClick={(e) => handleClick(e, 25)}>25</a></td>
-                                    <td><a href='' onClick={(e) => handleClick(e, 5)}>5</a></td>
+                                    <td><a href='' onClick={(e) => handleClick(e, 30, 'STG Live Projects')}>30</a></td>
+                                    <td><a href='' onClick={(e) => handleClick(e, 25, 'STG Live Offline')}>25</a></td>
+                                    <td><a href='' onClick={(e) => handleClick(e, 5, 'STG Live Online')}>5</a></td>
                                 </tr>
                                 <tr>
                                     <td>ConfirmIT</td>
                                     <td>800</td>
-                                    <td><a href='' onClick={(e) => handleClick(e, 50)}>50</a></td>
-                                    <td><a href='' onClick={(e) => handleClick(e, 42)}>42</a></td>
-                                    <td><a href='' onClick={(e) => handleClick(e, 8)}>8</a></td>
+                                    <td><a href='' onClick={(e) => handleClick(e, 50, 'ConfirmIt Live Projects')}>50</a></td>
+                                    <td><a href='' onClick={(e) => handleClick(e, 42, 'ConfirmIt Live Offline')}>42</a></td>
+                                    <td><a href='' onClick={(e) => handleClick(e, 8, 'ConfirmIt Live Online')}>8</a></td>
                                 </tr>
                                 <tr>
                                     <td>Decipher</td>
                                     <td>66</td>
-                                    <td><a href='' onClick={(e) => handleClick(e, 4)}>4</a></td>
-                                    <td><a href='' onClick={(e) => handleClick(e, 0)}>0</a></td>
-                                    <td><a href='' onClick={(e) => handleClick(e, 4)}>4</a></td>
+                                    <td><a href='' onClick={(e) => handleClick(e, 4, 'Decipher Live Projects')}>4</a></td>
+                                    <td><a href='' onClick={(e) => handleClick(e, 0, 'Decipher Live Offline')}>0</a></td>
+                                    <td><a href='' onClick={(e) => handleClick(e, 4, 'Decipher Live Online')}>4</a></td>
                                 </tr>
                                 <tr>
                                     <td>Total</td>
@@ -105,7 +107,7 @@ const TableSample: React.FC<TEST> = ({ header }) => {
                             <div className="row align-items-center">
                                 <div className="col">
                                     <h4 className="card-header-title">
-                                        {header}
+                                        {header} : {projectDetailsHeader} Projects list
                                     </h4>
                                 </div>
 
