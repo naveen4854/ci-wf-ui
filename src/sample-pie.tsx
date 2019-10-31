@@ -11,7 +11,7 @@ interface TEST {
 
 const PieSample: React.FC<TEST> = ({ header, data }) => {
     return (
-        <div className="card" >
+        <div className="card">
             <div className="card-header">
                 {header}
             </div>

@@ -39,7 +39,7 @@ const App: React.FC = () => {
       <Navbar></Navbar>
       <div className="container-fluid" style={{ paddingTop: 20, paddingBottom: 20, backgroundColor: '#ece8e8' }}>
         <div className='row'>
-          <div className='col-6'>
+          <div className='col-8'>
 
             <SimpleMap countries={state.countries} onCountrySelected={countrySelected} setContent={setContent}></SimpleMap>
             <ReactTooltip>
@@ -47,7 +47,7 @@ const App: React.FC = () => {
               {/* <h2>{content.POP_EST}</h2> */}
             </ReactTooltip>
           </div>
-          <div className='col-6'>
+          <div className='col-4'>
             <PieSample
               data={{
                 labels: [

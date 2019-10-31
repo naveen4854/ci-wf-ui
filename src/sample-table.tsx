@@ -8,17 +8,19 @@ interface TEST {
 
 const TableSample: React.FC<TEST> = ({ header }) => {
     const [projects, setProjects] = useState([] as any[]);
+    const [showProjectDetails, setShowProjectDetails] = useState(false);
 
     const handleClick = (e: any, num: number) => {
         e.preventDefault();
         const newArr = Array(num).fill(0);
         setProjects([...newArr]);
+        setShowProjectDetails(true);
     }
 
     return (
         header !== '' ? < div className="row" style={{ marginTop: 20 }}>
             <div className="col-6" >
-                <div className="card">
+                <div className="card" style={{height:438}}>
                     <div className="card-header">
                         {header}
                     </div>
@@ -90,7 +92,8 @@ const TableSample: React.FC<TEST> = ({ header }) => {
                         }]
                     }} header={'Live Projects Info'} />
             </div>
-            <div className="col-12" style={{ marginTop: 20 }}>
+            {
+            showProjectDetails && <div className="col-12" style={{ marginTop: 20 }}>
                 <div className="card">
                     <div className="card-header">
                         {header}
@@ -135,7 +138,9 @@ const TableSample: React.FC<TEST> = ({ header }) => {
                         </Table>
                     </div>
                 </div>
+               
             </div>
+            }
         </div > : <React.Fragment></React.Fragment>
     )
 }

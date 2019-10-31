@@ -96,7 +96,8 @@ const SimpleMap: React.FC<IMyComponentState> = ({ onCountrySelected, setContent,
     return (
         <div className="card" >
             <div className="card-body">
-                <ComposableMap data-tip={state.countrySelected} showCenter={false} style={{ width: "100%", height: "auto" }}>
+                <ComposableMap data-tip={state.countrySelected} showCenter={false} width={900}
+  height={500}>
                     <ZoomableGroup center={state.center} zoom={1}>
                         <Geographies geography={state.paths} disableOptimization>
                             {({ geographies, proj }: any) =>
