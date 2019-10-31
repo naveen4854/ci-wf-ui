@@ -51,21 +51,21 @@ const App: React.FC = () => {
             <PieSample
               data={{
                 labels: [
-                  'Green',
-                  'Yellow',
-                  'Red',
+                  'Total Live Projects',
+                  'Live Online Projects',
+                  'Live Offline Projects',
                 ],
                 datasets: [{
                   data: [300, 50, 100],
                   backgroundColor: [
                     '#447733',
+                    '#FFBF00',
                     '#DD0014',
-                    '#FFBF00'
                   ],
                   hoverBackgroundColor: [
                     '#447733',
+                    '#FFBF00',
                     '#DD0014',
-                    '#FFBF00'
                   ]
                 }]
               }} header={state.selectedCountry && state.selectedCountry !== '' ? `${state.selectedCountry}  - Live Project Status` : 'Global - Live Project Status'} />

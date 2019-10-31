@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Table } from 'react-bootstrap';
 import PieSample from './sample-pie';
 
@@ -7,8 +7,12 @@ interface TEST {
 }
 
 const TableSample: React.FC<TEST> = ({ header }) => {
-    const handleClick = (e: any) => {
+    const [projects, setProjects] = useState([] as any[]);
+
+    const handleClick = (e: any, num: number) => {
         e.preventDefault();
+        const newArr = Array(num).fill(0);
+        setProjects([...newArr]);
     }
 
     return (
@@ -33,23 +37,23 @@ const TableSample: React.FC<TEST> = ({ header }) => {
                                 <tr>
                                     <td>Survey To Go</td>
                                     <td>125</td>
-                                    <td><a href='' onClick={handleClick}>30</a></td>
-                                    <td><a href='' onClick={handleClick}>25</a></td>
-                                    <td><a href='' onClick={handleClick}>5</a></td>
+                                    <td><a href='' onClick={(e) => handleClick(e, 30)}>30</a></td>
+                                    <td><a href='' onClick={(e) => handleClick(e, 25)}>25</a></td>
+                                    <td><a href='' onClick={(e) => handleClick(e, 5)}>5</a></td>
                                 </tr>
                                 <tr>
                                     <td>ConfirmIT</td>
                                     <td>800</td>
-                                    <td><a href='' onClick={handleClick}>50</a></td>
-                                    <td><a href='' onClick={handleClick}>42</a></td>
-                                    <td><a href='' onClick={handleClick}>8</a></td>
+                                    <td><a href='' onClick={(e) => handleClick(e, 50)}>50</a></td>
+                                    <td><a href='' onClick={(e) => handleClick(e, 42)}>42</a></td>
+                                    <td><a href='' onClick={(e) => handleClick(e, 8)}>8</a></td>
                                 </tr>
                                 <tr>
                                     <td>Decipher</td>
                                     <td>66</td>
-                                    <td><a href='' onClick={handleClick}>4</a></td>
-                                    <td><a href='' onClick={handleClick}>0</a></td>
-                                    <td><a href='' onClick={handleClick}>4</a></td>
+                                    <td><a href='' onClick={(e) => handleClick(e, 4)}>4</a></td>
+                                    <td><a href='' onClick={(e) => handleClick(e, 0)}>0</a></td>
+                                    <td><a href='' onClick={(e) => handleClick(e, 4)}>4</a></td>
                                 </tr>
                                 <tr>
                                     <td>Total</td>
@@ -67,24 +71,53 @@ const TableSample: React.FC<TEST> = ({ header }) => {
                 <PieSample
                     data={{
                         labels: [
-                            'Green',
-                            'Blue',
-                            'Yellow'
+                            'Total Live Projects',
+                            'Live Online Projects',
+                            'Live Offline Projects',
                         ],
                         datasets: [{
                             data: [300, 50, 100],
                             backgroundColor: [
                                 '#447733',
+                                '#FFBF00',
                                 '#DD0014',
-                                '#FFBF00'
                             ],
                             hoverBackgroundColor: [
                                 '#447733',
+                                '#FFBF00',
                                 '#DD0014',
-                                '#FFBF00'
                             ]
                         }]
                     }} header={'Live Projects Info'} />
+            </div>
+            <div className="col-12" >
+                <div className="card">
+                    <div className="card-header">
+                        {header}
+                    </div>
+                    <div className="card-body ">
+                        <Table responsive bordered>
+                            <thead>
+                                <tr>
+                                    <th>Project Id</th>
+                                    <th>ONL ID / STG ID</th>
+                                    <th>Project Name</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    projects.map((prj, i) => <tr>
+                                        <td>Project Id {i}</td>
+                                        <td>ONL {i}</td>
+                                        <td>Test{i}</td>
+                                    </tr>)
+                                }
+
+                            </tbody>
+                        </Table>
+                    </div>
+                </div>
             </div>
         </div > : <React.Fragment></React.Fragment>
     )
