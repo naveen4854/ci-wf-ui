@@ -36,25 +36,45 @@ const App: React.FC = () => {
   }
   return (
     <div>
-     <Navbar></Navbar>
-    <div className="container-fluid" style={{ paddingTop: 20,  paddingBottom: 20, backgroundColor: '#ece8e8' }}>
-      <div className='row'>
-        <div className='col-6'>
-          
-          <SimpleMap countries={state.countries} onCountrySelected={countrySelected} setContent={setContent}></SimpleMap>
-          <ReactTooltip>
-            <a>{content.NAME}</a>
-            {/* <h2>{content.POP_EST}</h2> */}
-          </ReactTooltip>
-        </div>
-        <div className='col-6'>
-          <PieSample selectedCountry={state.selectedCountry} />
-        </div>
-        <div className='col-6'>
-          <TableSample header={state.selectedCountry} />
+      <Navbar></Navbar>
+      <div className="container-fluid" style={{ paddingTop: 20, paddingBottom: 20, backgroundColor: '#ece8e8' }}>
+        <div className='row'>
+          <div className='col-6'>
+
+            <SimpleMap countries={state.countries} onCountrySelected={countrySelected} setContent={setContent}></SimpleMap>
+            <ReactTooltip>
+              <a>{content.NAME}</a>
+              {/* <h2>{content.POP_EST}</h2> */}
+            </ReactTooltip>
+          </div>
+          <div className='col-6'>
+            <PieSample
+              data={{
+                labels: [
+                  'Green',
+                  'Yellow',
+                  'Red',
+                ],
+                datasets: [{
+                  data: [300, 50, 100],
+                  backgroundColor: [
+                    '#447733',
+                    '#DD0014',
+                    '#FFBF00'
+                  ],
+                  hoverBackgroundColor: [
+                    '#447733',
+                    '#DD0014',
+                    '#FFBF00'
+                  ]
+                }]
+              }} header={state.selectedCountry && state.selectedCountry !== '' ? `${state.selectedCountry}  - Live Project Status` : 'Global - Live Project Status'} />
+          </div>
+          <div className='col-12'>
+            <TableSample header={state.selectedCountry} />
+          </div>
         </div>
       </div>
-    </div>
     </div>
   );
 }
