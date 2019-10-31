@@ -4,6 +4,7 @@ import SimpleMap from './sample-map';
 import PieSample from './sample-pie';
 import TableSample from './sample-table';
 import ReactTooltip from "react-tooltip";
+import Navbar from './navbar';
 
 const App: React.FC = () => {
   const [state, setState] = useState({
@@ -34,9 +35,12 @@ const App: React.FC = () => {
     console.log(countryName, 'countryName')
   }
   return (
+    <div>
+     <Navbar></Navbar>
     <div className="container-fluid" style={{ paddingTop: 20,  paddingBottom: 20, backgroundColor: '#ece8e8' }}>
       <div className='row'>
         <div className='col-6'>
+          
           <SimpleMap countries={state.countries} onCountrySelected={countrySelected} setContent={setContent}></SimpleMap>
           <ReactTooltip>
             <a>{content.NAME}</a>
@@ -50,6 +54,7 @@ const App: React.FC = () => {
           <TableSample header={state.selectedCountry} />
         </div>
       </div>
+    </div>
     </div>
   );
 }
