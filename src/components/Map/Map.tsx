@@ -88,16 +88,12 @@ const SimpleMap: React.FC<IMyComponentState> = ({ onCountrySelected, setContent,
 
     }
 
-    const moveEnd = (e: any, point: Point) => {
-        console.log(point)
-    }
-
     return (
         <div className="card" >
             <div className="card-body">
                 <ComposableMap projection="geoMercator" data-tip={state.countrySelected} showCenter={false} width={900}
                     height={500}>
-                    <ZoomableGroup center={state.center} zoom={0.8} onMoveEnd={moveEnd}>
+                    <ZoomableGroup center={state.center} zoom={0.8} >
                         <Geographies geography={state.paths} disableOptimization>
                             {({ geographies, proj }: any) =>
                                 geographies.map((geo: any, i: any) => {
