@@ -31,7 +31,7 @@ interface IMyComponentState {
     countries: any[]
 }
 
-const SimpleMap: React.FC<IMyComponentState> = ({ onCountrySelected, setContent, countries }) => {
+const Map: React.FC<IMyComponentState> = ({ onCountrySelected, setContent, countries }) => {
     // const [content, setContent] = useState("");
 
     const [state, setState] = useState({
@@ -135,7 +135,7 @@ const SimpleMap: React.FC<IMyComponentState> = ({ onCountrySelected, setContent,
                                                 setContent(geo.properties);
                                             }}
                                             onMouseLeave={() => {
-                                                setContent({});
+                                                setContent({NAME : ''});
                                             }}
                                             style={contryStyle}
                                         />
@@ -150,4 +150,4 @@ const SimpleMap: React.FC<IMyComponentState> = ({ onCountrySelected, setContent,
     );
 }
 
-export default React.memo(SimpleMap);
+export default React.memo(Map);

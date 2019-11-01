@@ -4,7 +4,6 @@ import Footer from "./Footer/Footer";
 import Header from "./Header/Header";
 import Map from "./Map/Map";
 import Piechart from "./Piechart/Piechart";
-import Sidenav from "./Sidenav/Sidenav";
 import CustomTable from "./CustomTable/CustomTable";
 
 export {
@@ -14,6 +13,5 @@ export {
     Header,
     Map,
     Piechart,
-    Sidenav,
     CustomTable
 }

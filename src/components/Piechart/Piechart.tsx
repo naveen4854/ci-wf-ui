@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Pie } from 'react-chartjs-2';
-
 
 interface TEST {
     header: string
@@ -20,17 +19,6 @@ const Piechart: React.FC<TEST> = ({ header, data }) => {
                 </div>
             </div>
         </div>
-        // <div className="card">
-        // <div className="graph-chart">
-        //     <div className="card-header">
-        //         <h4>
-        //         </h4>
-        //     </div>
-        //     <div className="card-body">
-        //     </div>
-        // </div>
-        // </div>
-
     )
 }
 

@@ -37,10 +37,12 @@ const Dashboard: React.FC = () => {
                 <div className='row'>
                     <div className='col-8'>
                         <Map countries={state.countries} onCountrySelected={countrySelected} setContent={setContent}></Map>
-                        <ReactTooltip>
-                            <a>{content.NAME}</a>
-                            {/* <h2>{content.POP_EST}</h2> */}
-                        </ReactTooltip>
+                        { 
+                            content && content.NAME !== '' &&
+                            <ReactTooltip>
+                                <a>{content.NAME}</a>
+                            </ReactTooltip>
+                        }
                     </div>
                     <div className='col-4'>
                         <Piechart
