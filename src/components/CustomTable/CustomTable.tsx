@@ -48,22 +48,22 @@ const CustomTable: React.FC<TEST> = ({ header }) => {
                                     <td>Survey To Go</td>
                                     <td>125</td>
                                     <td><a href='' onClick={(e) => handleClick(e, 30, 'STG Live Projects')}>30</a></td>
-                                    <td><a href='' onClick={(e) => handleClick(e, 25, 'STG Live Offline')}>25</a></td>
-                                    <td><a href='' onClick={(e) => handleClick(e, 5, 'STG Live Online')}>5</a></td>
+                                    <td><a href='' onClick={(e) => handleClick(e, 25, 'STG Live Offline Projects')}>25</a></td>
+                                    <td><a href='' onClick={(e) => handleClick(e, 5, 'STG Live Online Projects')}>5</a></td>
                                 </tr>
                                 <tr>
                                     <td>ConfirmIT</td>
                                     <td>800</td>
                                     <td><a href='' onClick={(e) => handleClick(e, 50, 'ConfirmIt Live Projects')}>50</a></td>
-                                    <td><a href='' onClick={(e) => handleClick(e, 42, 'ConfirmIt Live Offline')}>42</a></td>
-                                    <td><a href='' onClick={(e) => handleClick(e, 8, 'ConfirmIt Live Online')}>8</a></td>
+                                    <td><a href='' onClick={(e) => handleClick(e, 42, 'ConfirmIt Live Offline Projects')}>42</a></td>
+                                    <td><a href='' onClick={(e) => handleClick(e, 8, 'ConfirmIt Live Online Projects')}>8</a></td>
                                 </tr>
                                 <tr>
                                     <td>Decipher</td>
                                     <td>66</td>
                                     <td><a href='' onClick={(e) => handleClick(e, 4, 'Decipher Live Projects')}>4</a></td>
-                                    <td><a href='' onClick={(e) => handleClick(e, 0, 'Decipher Live Offline')}>0</a></td>
-                                    <td><a href='' onClick={(e) => handleClick(e, 4, 'Decipher Live Online')}>4</a></td>
+                                    <td><a href='' onClick={(e) => handleClick(e, 0, 'Decipher Live Offline Projects')}>0</a></td>
+                                    <td><a href='' onClick={(e) => handleClick(e, 4, 'Decipher Live Online Projects')}>4</a></td>
                                 </tr>
                                 <tr>
                                     <td>Total</td>
@@ -107,7 +107,7 @@ const CustomTable: React.FC<TEST> = ({ header }) => {
                             <div className="row align-items-center">
                                 <div className="col">
                                     <h4 className="card-header-title">
-                                        {header} : {projectDetailsHeader} Projects list
+                                        {header} : {projectDetailsHeader} list
                                     </h4>
                                 </div>
 
