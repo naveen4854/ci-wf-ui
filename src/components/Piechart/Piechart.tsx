@@ -8,7 +8,7 @@ interface TEST {
 }
 
 
-const PieSample: React.FC<TEST> = ({ header, data }) => {
+const Piechart: React.FC<TEST> = ({ header, data }) => {
     return (
         <div className="chart-block">
             <div className="graph-chart">
@@ -24,4 +24,4 @@ const PieSample: React.FC<TEST> = ({ header, data }) => {
     )
 }
 
-export default PieSample;
+export default Piechart;

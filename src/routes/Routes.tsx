@@ -1,7 +1,6 @@
 import React from "react"
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
-import App from "./App";
-import Header from './Header/Header'
+import { App, Header } from "../components/index";
 
 const Routes = () => {
   return (

@@ -7,8 +7,8 @@ import {
     Point
 } from "react-simple-maps";
 import chroma from 'chroma-js';
-import { geoPath } from "d3-geo";
-import ReactTooltip from "react-tooltip";
+// import { geoPath } from "d3-geo";
+// import ReactTooltip from "react-tooltip";
 // import { geoTimes } from "d3-geo-projection";
 
 const geoPaths = ["/world-10m.json", "/world.json", "/ch.json"];

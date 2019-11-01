@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import './App.scss';
-import SimpleMap from './sample-map';
-import PieSample from './sample-pie';
-import TableSample from './sample-table';
 import ReactTooltip from "react-tooltip";
-import Navbar from './navbar';
-import Dashboard from './dashboard/dashboard';
-import Footer from './Footer/Footer';
+import './App.scss';
+import { Dashboard, Footer, Sidenav } from "../index";
 
 const App: React.FC = () => {
   const [state, setState] = useState({
@@ -38,7 +33,7 @@ const App: React.FC = () => {
   }
   return (
     <div>
-      <Navbar></Navbar>
+      <Sidenav></Sidenav>
       <Dashboard></Dashboard>
       <Footer></Footer>
     </div>

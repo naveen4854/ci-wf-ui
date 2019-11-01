@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
-
-import './dashboard.scss';
-import SimpleMap from '../sample-map';
-import PieSample from '../sample-pie';
-import TableSample from '../sample-table';
 import ReactTooltip from "react-tooltip";
+import './Dashboard.scss';
+import { Map, Piechart, CustomTable } from "../index";
 
 const Dashboard: React.FC = () => {
     const [state, setState] = useState({
@@ -39,14 +36,14 @@ const Dashboard: React.FC = () => {
             <div className="container-fluid" style={{ paddingTop: 20, paddingBottom: 20 }}>
                 <div className='row'>
                     <div className='col-8'>
-                        <SimpleMap countries={state.countries} onCountrySelected={countrySelected} setContent={setContent}></SimpleMap>
+                        <Map countries={state.countries} onCountrySelected={countrySelected} setContent={setContent}></Map>
                         <ReactTooltip>
                             <a>{content.NAME}</a>
                             {/* <h2>{content.POP_EST}</h2> */}
                         </ReactTooltip>
                     </div>
                     <div className='col-4'>
-                        <PieSample
+                        <Piechart
                             data={{
                                 labels: [
                                     'Total Live Projects',
@@ -69,7 +66,7 @@ const Dashboard: React.FC = () => {
                             }} header={state.selectedCountry && state.selectedCountry !== '' ? `${state.selectedCountry}  - Live Project Status` : 'Global - Live Project Status'} />
                     </div>
                     <div className='col-12'>
-                        <TableSample header={state.selectedCountry} />
+                        <CustomTable header={state.selectedCountry} />
                     </div>
                 </div>
             </div>

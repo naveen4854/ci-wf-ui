@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Table } from 'react-bootstrap';
-import PieSample from './sample-pie';
+import { Piechart } from "../index";
 
 interface TEST {
     header: string
 }
 
-const TableSample: React.FC<TEST> = ({ header }) => {
+const CustomTable: React.FC<TEST> = ({ header }) => {
     const [projects, setProjects] = useState([] as any[]);
     const [showProjectDetails, setShowProjectDetails] = useState(false);
     const [projectDetailsHeader, setprojectDetailsHeader] = useState('');
@@ -78,7 +78,7 @@ const TableSample: React.FC<TEST> = ({ header }) => {
                 </div>
             </div>
             <div className="col-4">
-                <PieSample
+                <Piechart
                     data={{
                         labels: [
                             'Total Live Projects',
@@ -160,5 +160,5 @@ const TableSample: React.FC<TEST> = ({ header }) => {
     )
 }
 
-export default TableSample;
+export default CustomTable;
 
