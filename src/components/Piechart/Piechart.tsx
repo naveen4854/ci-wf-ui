@@ -10,16 +10,18 @@ interface TEST {
 
 const Piechart: React.FC<TEST> = ({ header, data }) => {
     return (
-        <div className="chart-block">
-            <div className="graph-chart">
-                <h4>
-                    {header}
-                </h4>
-                <div className="chart-data">
-                    <Pie data={data} />
-                </div>
+        <div className="card">
+        {/* <div className="graph-chart"> */}
+            <div className="card-header">
+            <h4>
+                {header}
+            </h4>
             </div>
-        </div>
+            <div className="card-body">
+                <Pie data={data} />
+            </div>
+        {/* </div> */}
+    </div>
 
     )
 }
