@@ -36,8 +36,8 @@ const SimpleMap: React.FC<IMyComponentState> = ({ onCountrySelected, setContent,
 
     const [state, setState] = useState({
         detail: false,
-        paths: geoPaths[0],
-        center: [0, 0] as Point,
+        paths: geoPaths[1],
+        center: [10, 45] as Point,
         zoom: 1,
         countrySelected: ''
     })
@@ -54,11 +54,7 @@ const SimpleMap: React.FC<IMyComponentState> = ({ onCountrySelected, setContent,
         const { detail } = state;
         console.log(geography, 'click');
         setState({
-            paths: geoPaths[0],
-            center: [0, 0] as Point,
-            // center: detail ? [0, 0] as Point : [8, 47] as Point,
-            zoom: detail ? 1 : 1,
-            detail: !detail,
+            ...state,
             countrySelected: geography.properties.ISO_A2
         });
 
@@ -91,12 +87,17 @@ const SimpleMap: React.FC<IMyComponentState> = ({ onCountrySelected, setContent,
         }
 
     }
+
+    const moveEnd = (e: any, point: Point) => {
+        console.log(point)
+    }
+
     return (
         <div className="card" >
             <div className="card-body">
                 <ComposableMap projection="geoMercator" data-tip={state.countrySelected} showCenter={false} width={900}
                     height={500}>
-                    <ZoomableGroup center={state.center} zoom={0.8}>
+                    <ZoomableGroup center={state.center} zoom={0.8} onMoveEnd={moveEnd}>
                         <Geographies geography={state.paths} disableOptimization>
                             {({ geographies, proj }: any) =>
                                 geographies.map((geo: any, i: any) => {
