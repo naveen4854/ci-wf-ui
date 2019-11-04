@@ -1,6 +1,6 @@
 import React from "react"
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
-import { App, Header, Footer, ProgressTracker } from "../components/index";
+import { App, Header, Footer, ProgressTracker, SyncfusionPertchart } from "../components/index";
 
 const Routes = () => {
   return (
@@ -10,6 +10,7 @@ const Routes = () => {
         <Route exact path="/" component={App} />
         <Route exact path="/dashboard" component={App} />
         <Route exact path="/progress-tracker" component={ProgressTracker} />
+        <Route exact path="/syncfusion-pertcart" component={SyncfusionPertchart} />
       </Switch>
       <Route component={Footer} />
     </Router>
