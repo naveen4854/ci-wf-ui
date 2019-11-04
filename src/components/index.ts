@@ -5,6 +5,7 @@ import Header from "./Header/Header";
 import Map from "./Map/Map";
 import Piechart from "./Piechart/Piechart";
 import CustomTable from "./CustomTable/CustomTable";
+import ProgressTracker from "./ProgressTracker/ProgressTracker";
 
 export {
     App,
@@ -13,5 +14,6 @@ export {
     Header,
     Map,
     Piechart,
-    CustomTable
+    CustomTable,
+    ProgressTracker
 }

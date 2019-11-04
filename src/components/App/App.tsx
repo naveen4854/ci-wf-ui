@@ -5,7 +5,7 @@ import { Dashboard } from "../index";
 const App: React.FC = () => {
 
   return (
-    <div>
+    <div className="col-12">
       <Dashboard></Dashboard>
     </div>
   );
