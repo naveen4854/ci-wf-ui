@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Table } from 'react-bootstrap';
-import { Piechart } from "../index";
+import { Piechart, ProgressTracker } from "../index";
+import { Link } from 'react-router-dom';
 
 interface TEST {
     header: string
@@ -141,7 +142,14 @@ const CustomTable: React.FC<TEST> = ({ header }) => {
                                                     break;
                                             }
                                             return <tr>
-                                                <td>Project Id {i}</td>
+                                                <td>
+                                                    <Link to={{
+                                                        pathname : '/progress-tracker',
+                                                        state : {
+                                                            id : i
+                                                        }
+                                                        }}>Project Id {i}</Link>
+                                                </td> 
                                                 <td>ONL {i}</td>
                                                 <td>Test{i}</td>
                                                 <td ><div style={{ padding: 20, background: statusColor }}></div></td>
