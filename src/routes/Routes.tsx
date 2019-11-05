@@ -2,6 +2,7 @@ import React from "react"
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import { App, Header, Footer, ProgressTracker, SyncfusionPertchart } from "../components/index";
 import PertSample from "../components/pert-sample/pert-sample";
+import SvgPert from "../components/SvgPert";
 
 const Routes = () => {
   return (
@@ -11,7 +12,8 @@ const Routes = () => {
         <Route exact path="/dashboard" component={App} />
         <Route exact path="/progress-tracker" component={ProgressTracker} />
         <Route exact path="/syncfusion-pertcart" component={SyncfusionPertchart} />
-        <Route exact path="/p" component={PertSample} />
+        <Route exact path="/p" component={PertSample} />SvgPert
+        <Route exact path="/SvgPert" component={SvgPert} />
       </Switch>
       <Route component={Footer} />
     </Router>
