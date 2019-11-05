@@ -9,7 +9,7 @@ const data = [
         id: 0,
         stage: "Commissioned",
         categoryId: 1,
-        pid: 0,
+        pId: null,
         x: 0,
         y: 0
     },
@@ -17,7 +17,7 @@ const data = [
         id: 1,
         stage: "Programming",
         categoryId: 2,
-        pid: 0,
+        pId: 0,
         x: 0,
         y: 0
     },
@@ -25,7 +25,7 @@ const data = [
         id: 2,
         stage: "Programming",
         categoryId: 2,
-        pid: 0,
+        pId: 0,
         x: 0,
         y: 0
     },
@@ -33,7 +33,7 @@ const data = [
         id: 3,
         stage: "Collection",
         categoryId: 3,
-        pid: 1,
+        pId: 1,
         x: 0,
         y: 0
     },
@@ -41,7 +41,7 @@ const data = [
         id: 4,
         stage: "Collection",
         categoryId: 3,
-        pid: 2,
+        pId: 2,
         x: 0,
         y: 0
     }
@@ -76,7 +76,15 @@ const PertSample2: React.FC = () => {
                 )}
                 {
                     data.map((d) => {
-                        
+                        if (d.pId === null)
+                            return <React.Fragment></React.Fragment>
+                        const child = d;
+                        const parent = data.find(p => p.id === d.pId);
+                        if (!parent)
+                            return <React.Fragment></React.Fragment>
+                        const parentRight = { x: parent.x + rectwidth, y: parent.y + rectheight / 2 }
+                        const childLeft = { x: child.x, y: child.y + rectheight / 2 }
+                        return <line x1={parentRight.x} y1={parentRight.y} x2={childLeft.x} y2={childLeft.y} style={{ stroke: 'black', strokeWidth: 2 }} />
                     })
                 }
             </svg>
