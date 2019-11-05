@@ -3,6 +3,7 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import { App, Header, Footer, ProgressTracker, SyncfusionPertchart } from "../components/index";
 import PertSample from "../components/pert-sample/pert-sample";
 import SvgPert from "../components/SvgPert";
+import PertSample2 from "../components/pert-sample/pertsample2";
 
 const Routes = () => {
   return (
@@ -14,6 +15,7 @@ const Routes = () => {
         <Route exact path="/syncfusion-pertcart" component={SyncfusionPertchart} />
         <Route exact path="/p" component={PertSample} />SvgPert
         <Route exact path="/SvgPert" component={SvgPert} />
+        <Route exact path="/" component={PertSample2} />
       </Switch>
       <Route component={Footer} />
     </Router>
