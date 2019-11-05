@@ -6,24 +6,44 @@ const Text = () => {
 
 const data = [
     {
+        id: 0,
         stage: "Commissioned",
-        id: 1
+        categoryId: 1,
+        pid: 0,
+        x: 0,
+        y: 0
     },
     {
+        id: 1,
         stage: "Programming",
-        id: 2
+        categoryId: 2,
+        pid: 0,
+        x: 0,
+        y: 0
     },
     {
+        id: 2,
         stage: "Programming",
-        id: 2
+        categoryId: 2,
+        pid: 0,
+        x: 0,
+        y: 0
     },
     {
+        id: 3,
         stage: "Collection",
-        id: 3
+        categoryId: 3,
+        pid: 1,
+        x: 0,
+        y: 0
     },
     {
-        stage: "Programming",
-        id: 3
+        id: 4,
+        stage: "Collection",
+        categoryId: 3,
+        pid: 2,
+        x: 0,
+        y: 0
     }
 ]
 
@@ -32,30 +52,34 @@ const renderRect = (rectWidth: number, rectHeight: number, rectX: number, rectY:
 }
 
 const PertSample2: React.FC = () => {
-    const rectwidth=150, rectheight=100;
-    let count=0, value=data[0].id, defx=0, defy=0;
+    const rectwidth = 150, rectheight = 100;
+    let count = 0, value = data[0].categoryId, defx = 0, defy = 0;
     return (
         <div style={{ margin: 100, height: '100vh' }}>
-        <svg width="auto" height="auto">
-            {data.map((d,index) => {
-                {
-                    if(d.id==value){
-                        count++
-                    }else{
-                        count=1;
-                        value=d.id;
+            <svg width="auto" height="auto">
+                {data.map((d, index) => {
+                    {
+                        if (d.categoryId == value) {
+                            count++
+                        } else {
+                            count = 1;
+                            value = d.categoryId;
+                        }
+                        defx = (rectwidth * d.categoryId) + 50 * (d.categoryId - 1);
+                        defy = 50 * (count - 1) + (rectheight * count);
+                        d.x = defx; d.y = defy;
+                        return <g>
+                            {renderRect(rectwidth, rectheight, defx, defy)}
+                        </g>
                     }
-                    defx=(rectwidth*d.id)+50*(d.id-1);
-                    defy=50*(count-1)+(rectheight*count);
-                    return <g>
-                    {renderRect(rectwidth, rectheight, defx, defy)}
-                    <line x1={defx+rectwidth} y1={defy+50} x2={defx+rectwidth+50} y2={defy+50} style={{ stroke: 'black', strokeWidth: 2}} />
-                    </g>
-                    
-                }     
-            }
-            )}
-        </svg>
+                }
+                )}
+                {
+                    data.map((d) => {
+                        
+                    })
+                }
+            </svg>
         </div>
     )
 }
