@@ -71,7 +71,9 @@ interface ISvgRectangle {
     y: number,
     width: number,
     height: number,
-    gap: number
+    stroke?: string,
+    strokeWidth?: number,
+    fill?: string
 }
 
 interface ISvgLine {
@@ -79,6 +81,8 @@ interface ISvgLine {
     y1: number,
     x2: number,
     y2: number,
+    stroke?: string,
+    strokeWidth?: number
 }
 
 interface IPoint {
@@ -87,34 +91,35 @@ interface IPoint {
 }
 
 const Rectangle: React.FC<ISvgRectangle> = (props) => {
-    return <rect {...props} style={{ fill: "rgb(0,0,255)", strokeWidth: 1, stroke: "rgb(0,0,0)" }} />
+    return <rect {...props} />
 }
 
 const Line: React.FC<ISvgLine> = (props) => {
     return (
         <React.Fragment>
             <defs>
-                <marker id="triangle" viewBox="0 0 10 10"
-                    refX="1" refY="5"
-                    markerUnits="strokeWidth"
-                    markerWidth="10" markerHeight="10"
-                    orient="auto">
-                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#f00" />
+                <marker id="arrow" markerWidth="10" markerHeight="10" refX="8.5" refY="3" orient="auto" markerUnits="strokeWidth">
+                    <path d="M0,0 L0,6 L9,3 z" fill={props.stroke} />
                 </marker>
             </defs>
-            <line {...props} markerEnd="url(#triangle)" style={{ stroke: "rgb(255,0,0)", strokeWidth: 2 }} />
+            <line {...props} markerEnd="url(#arrow)" />
         </React.Fragment>
     )
 }
 
-const SvgPert: React.FC = () => {
+const SvgPertchart: React.FC = () => {
 
     var dimension = { x: 0, y: 0, width: 100, height: 50, gap: 50 };
-
     const midPoints: Map<number, IPoint> = new Map();
 
     const getStages = () => {
         return stages.map(stage => getChildren(stage.children));
+    }
+
+    const getMidpoint = (x1: number, y1: number, x2: number, y2: number) => {
+        let x = (x1 + x2) / 2;
+        let y = (y1 + y2) / 2;
+        return { x, y };
     }
 
     const getChildren = (children: any) => {
@@ -129,22 +134,11 @@ const SvgPert: React.FC = () => {
 
             let x1 = dimension.x + dimension.width;
             let y1 = dimension.y;
-            let x2 = dimension.x + dimension.width;
             let y2 = dimension.y + dimension.height;
 
+            midPoints.set(child.id, getMidpoint(x1, y1, x1, y2));
 
-            let point: IPoint = {
-                x: x1,
-                y: (y1 + y2)/2
-            }
-
-            midPoints.set(child.id, point);
-
-            return (
-                <React.Fragment>
-                    <Rectangle key={child.id} x={dimension.x} y={dimension.y} width={dimension.width} height={dimension.height} gap={dimension.gap} />
-                </React.Fragment>
-            )
+            return (<Rectangle key={child.id} x={dimension.x} y={dimension.y} width={dimension.width} height={dimension.height} fill="lightblue" />)
         });
     }
 
@@ -163,24 +157,17 @@ const SvgPert: React.FC = () => {
                 dimension.y = dimension.y + dimension.height + dimension.gap;
             }
 
-            dimension.x = dimension.x;
-            dimension.y = (dimension.y + dimension.height) / 2;
+            let target = getMidpoint(dimension.x, dimension.y, dimension.x, dimension.y + dimension.height)
             const midPoint = midPoints.get(child.parentId);
 
-            return (
-                <React.Fragment>{
-                    midPoint &&
-                    <Line key={child.id} x1={midPoint.x} y1={midPoint.y} x2={dimension.x} y2={dimension.y} />
-                }
-                </React.Fragment>
-            )
+            return (midPoint && <Line key={child.id} x1={midPoint.x} y1={midPoint.y} x2={target.x} y2={target.y} stroke="black" strokeWidth={1.5} />)
         });
     }
 
-    var style = { display: "flex", margin: 65 };
+    const style = { margin: 65 };
     return (
-        <div style={style}>
-            <svg width="2000" height="2000">
+        <div style={style} className="svg-container">
+            <svg width="1000" height="500">
                 {getStages()}
                 {getLineStages()}
             </svg>
@@ -188,4 +175,4 @@ const SvgPert: React.FC = () => {
     )
 }
 
-export default SvgPert;
+export default SvgPertchart;

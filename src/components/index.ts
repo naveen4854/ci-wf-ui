@@ -7,6 +7,7 @@ import Piechart from "./Piechart/Piechart";
 import CustomTable from "./CustomTable/CustomTable";
 import ProgressTracker from "./ProgressTracker/ProgressTracker";
 import SyncfusionPertchart from "./SyncfusionPERT/SyncfusionPertchart";
+import SvgPertchart from "./SvgPertchart/SvgPertchart";
 
 export {
     App,
@@ -17,5 +18,6 @@ export {
     Piechart,
     CustomTable,
     ProgressTracker,
-    SyncfusionPertchart
+    SyncfusionPertchart,
+    SvgPertchart
 }
