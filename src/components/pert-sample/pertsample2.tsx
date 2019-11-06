@@ -111,9 +111,9 @@ const PertSample2: React.FC = () => {
     let count = 0, value = data[0].categoryId, defx = 0, defy = 0, text = null;
 
     const getTargetPoint = (childRect: any, parentRight: any) => {
-        const childLeft = { x: childRect.x - 10, y: childRect.y + rectheight / 2 }
+        const childLeft = { x: childRect.x - 10, y: childRect.y < parentRight.y ? childRect.y + 2 * rectheight / 3 : childRect.y + rectheight / 2 }
         const childTop = { x: childRect.x + rectwidth / 3, y: childRect.y - 8 }
-        const childBottom = { x: childRect.x + rectwidth / 5, y: childRect.y + rectheight + 8 }
+        const childBottom = { x: childRect.x + rectwidth / 8, y: childRect.y + rectheight + 8 }
         // const childRight = { x: childRect.x + rectwidth, y: childRect.y + rectheight / 3 };
 
         const childLeftDist = distance(parentRight, childLeft);
