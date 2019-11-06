@@ -1,22 +1,29 @@
 import React from 'react';
 import './pert.scss'
 import data from './data';
+import stages from './stages'
 
 
 const PertSample2: React.FC = () => {
-    const rectwidth = 250, rectheight = 150, gapX = 200, gapY = 100, strokeWidth = 2;
-    let count = 0, value = data[0].categoryId, defx = 0, defy = 0, text = null;
+    const rectwidth = 150, rectheight = 120, gapX = 100, gapY = 50, strokeWidth = 2, headergap = rectwidth + gapX, headerheight = 20;
+    let count = 0, value = data[0].categoryId, defx = 0, defy = 0, text = null, hx = 0, hy = 0, color = '';
 
-    const renderRect = (rectWidth: number, rectHeight: number, rectX: number, rectY: number, text: any, stage: string) => {
+    const renderRect = (rectWidth: number, rectHeight: number, rectX: number, rectY: number, text: any, stage: string, color: string) => {
         return <svg x={rectX} y={rectY} fill='pink' >
+
             <rect width={rectWidth} height={rectHeight}></rect>
             <rect onClick={() => alert('hey')} width={rectWidth - strokeWidth} height={rectHeight / 3 - strokeWidth} x={strokeWidth} y={strokeWidth}
-                style={{ fill: '#0069d9', stroke: 'black', strokeWidth: strokeWidth, opacity: 1 }} />
+                style={{ fill: color, stroke: 'black', strokeWidth: strokeWidth, opacity: 1 }} />
             <rect width={rectWidth - strokeWidth} height={2 * rectHeight / 3 - strokeWidth} x={strokeWidth} y={rectHeight / 3}
                 style={{ fill: 'white', stroke: 'black', strokeWidth: strokeWidth, opacity: 1 }} />
             <text x={10} y={30} overflow="hidden" fill="white">{stage}</text>
-            <text x={10} y={100} overflow="hidden" fill="black">Start Date: {text.startDate}</text>
-            <text x={10} y={120} overflow="hidden" fill="black">End Date: {text.endDate}</text>
+            <text x={10} y={70} overflow="hidden" fill="black">Start Date: {text.startDate}</text>
+            <text x={10} y={90} overflow="hidden" fill="black">End Date: {text.endDate}</text>
+
+            {/* <foreignObject  x={10} y={60} width={250} height={150}>
+            
+            <div>Info: {text.info}</div>
+            </foreignObject> */}
         </svg >;
     }
 
@@ -45,9 +52,27 @@ const PertSample2: React.FC = () => {
         return Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
     }
 
+    const header = (header: string, x: number, y: number) => {
+        return <text id="headers" x={x} y={y} fill="black">{header}</text>
+    }
+
     return (
         <div style={{ margin: 0, height: '100vh', width: '100vw', overflow: 'scroll' }}>
-            <svg width="200vw" height="200vh" overflow='visible'>
+            <svg width="120vw" height="100vh" overflow='visible'>
+
+                {
+                    stages.map((s, index) => {
+                        hy = rectheight - headerheight;
+                        if (index == 0) {
+                            hx = rectwidth;
+                            return header(s, hx, hy);
+                        } else {
+                            hx = hx + gapX + rectwidth;
+                            console.log(index)
+                            return header(s, hx, hy);
+                        }
+                    })
+                }
                 {
                     data.map((d, index) => {
 
@@ -61,8 +86,15 @@ const PertSample2: React.FC = () => {
                         defy = gapY * (count - 1) + (rectheight * count);
                         text = d.text;
                         d.x = defx; d.y = defy;
+                        if (d.status === 'completed') {
+                            color = '#447733'
+                        } else if (d.status === 'progress') {
+                            color = '#FFBF00'
+                        } else if (d.status === 'delayed') {
+                            color = '#DD0014';
+                        }
                         return <g>
-                            {renderRect(rectwidth, rectheight, defx, defy, text, d.stage)}
+                            {renderRect(rectwidth, rectheight, defx, defy, text, d.stage, color)}
                         </g>
                     })
                 }
