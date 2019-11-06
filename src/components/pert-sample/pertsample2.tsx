@@ -2,26 +2,26 @@ import React from 'react';
 import './pert.scss'
 import data from './data';
 
-const renderRect = (rectWidth: number, rectHeight: number, rectX: number, rectY: number, text: any, stage: string) => {
-    const strokeWidth = 2;
-    return <svg x={rectX} y={rectY} fill='pink' >
-        <rect width={rectWidth} height={rectHeight}></rect>
-        <rect onClick={() => alert('hey')} width={rectWidth - strokeWidth} height={rectHeight / 3 - strokeWidth} x={strokeWidth} y={strokeWidth}
-            style={{ fill: '#0069d9', stroke: 'black', strokeWidth: strokeWidth, opacity: 1 }} />
-        <rect width={rectWidth - strokeWidth} height={2 * rectHeight / 3 - strokeWidth} x={strokeWidth} y={rectHeight / 3}
-            style={{ fill: 'white', stroke: 'black', strokeWidth: strokeWidth, opacity: 1 }} />
-        <text x={10} y={30} overflow="hidden" fill="white">{stage}</text>
-        <text x={10} y={100} overflow="hidden" fill="black">Start Date: {text.startDate}</text>
-        <text x={10} y={120} overflow="hidden" fill="black">End Date: {text.endDate}</text>
-    </svg >;
-}
 
 const PertSample2: React.FC = () => {
-    const rectwidth = 250, rectheight = 150, gapX = 200, gapY = 100;
+    const rectwidth = 250, rectheight = 150, gapX = 200, gapY = 100, strokeWidth = 2;
     let count = 0, value = data[0].categoryId, defx = 0, defy = 0, text = null;
 
+    const renderRect = (rectWidth: number, rectHeight: number, rectX: number, rectY: number, text: any, stage: string) => {
+        return <svg x={rectX} y={rectY} fill='pink' >
+            <rect width={rectWidth} height={rectHeight}></rect>
+            <rect onClick={() => alert('hey')} width={rectWidth - strokeWidth} height={rectHeight / 3 - strokeWidth} x={strokeWidth} y={strokeWidth}
+                style={{ fill: '#0069d9', stroke: 'black', strokeWidth: strokeWidth, opacity: 1 }} />
+            <rect width={rectWidth - strokeWidth} height={2 * rectHeight / 3 - strokeWidth} x={strokeWidth} y={rectHeight / 3}
+                style={{ fill: 'white', stroke: 'black', strokeWidth: strokeWidth, opacity: 1 }} />
+            <text x={10} y={30} overflow="hidden" fill="white">{stage}</text>
+            <text x={10} y={100} overflow="hidden" fill="black">Start Date: {text.startDate}</text>
+            <text x={10} y={120} overflow="hidden" fill="black">End Date: {text.endDate}</text>
+        </svg >;
+    }
+
     const getTargetPoint = (childRect: any, parentRight: any) => {
-        const childLeft = { x: childRect.x - 10, y: childRect.y < parentRight.y ? childRect.y + 2 * rectheight / 3 : childRect.y + rectheight / 2 }
+        const childLeft = { x: childRect.x - 10, y: childRect.y < parentRight.y ? childRect.y + (2 * rectheight / 3) : childRect.y + rectheight / 2 }
         const childTop = { x: childRect.x + rectwidth / 3, y: childRect.y - 8 }
         const childBottom = { x: childRect.x + rectwidth / 8, y: childRect.y + rectheight + 8 }
         // const childRight = { x: childRect.x + rectwidth, y: childRect.y + rectheight / 3 };
@@ -85,7 +85,7 @@ const PertSample2: React.FC = () => {
                             const parent = data.find(a => a.id === p);
                             if (!parent)
                                 return <React.Fragment></React.Fragment>
-                            const parentRight = { x: parent.x + rectwidth + 2, y: parent.y + 2 + rectheight / 2 }
+                            const parentRight = { x: parent.x + rectwidth, y: parent.y + rectheight / 2 }
                             let target = getTargetPoint(child, parent);
 
                             return <g>
