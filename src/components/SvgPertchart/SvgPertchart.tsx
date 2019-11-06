@@ -7,7 +7,7 @@ const stages = [
         children: [
             {
                 id: 11,
-                parentId: null,
+                parentId: [],
                 name: "stage1-child1",
                 first: true
             }
@@ -21,12 +21,12 @@ const stages = [
                 id: 21,
                 name: "stage2-child1",
                 first: true,
-                parentId: 11
+                parentId: [11]
             },
             {
                 id: 22,
                 name: "stage2-child2",
-                parentId: 11
+                parentId: [11]
             }
         ]
     },
@@ -38,17 +38,17 @@ const stages = [
                 id: 31,
                 name: "stage3-child1",
                 first: true,
-                parentId: 21
+                parentId: [21]
             },
             {
                 id: 32,
                 name: "stage3-child2",
-                parentId: 21
+                parentId: [21]
             },
             {
                 id: 33,
                 name: "stage3-child3",
-                parentId: 22
+                parentId: [22]
             }
         ]
     },
@@ -60,7 +60,7 @@ const stages = [
                 id: 41,
                 name: "stage4-child1",
                 first: true,
-                parentId: 31
+                parentId: [31, 32, 33]
             }
         ]
     }
@@ -158,9 +158,12 @@ const SvgPertchart: React.FC = () => {
             }
 
             let target = getMidpoint(dimension.x, dimension.y, dimension.x, dimension.y + dimension.height)
-            const midPoint = midPoints.get(child.parentId);
-
-            return (midPoint && <Line key={child.id} x1={midPoint.x} y1={midPoint.y} x2={target.x} y2={target.y} stroke="black" strokeWidth={1.5} />)
+            var lines: any[] = [];
+            for (const pid  of child.parentId) {
+                const midPoint = midPoints.get(pid);
+                lines.push(midPoint && <Line key={child.id} x1={midPoint.x} y1={midPoint.y} x2={target.x} y2={target.y} stroke="black" strokeWidth={1.5} />)
+            };
+            return lines;
         });
     }
 
