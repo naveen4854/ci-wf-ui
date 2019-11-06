@@ -6,6 +6,8 @@ import Map from "./Map/Map";
 import Piechart from "./Piechart/Piechart";
 import CustomTable from "./CustomTable/CustomTable";
 import ProgressTracker from "./ProgressTracker/ProgressTracker";
+import SyncfusionPertchart from "./SyncfusionPERT/SyncfusionPertchart";
+import SvgPertchart from "./SvgPertchart/SvgPertchart";
 
 export {
     App,
@@ -15,5 +17,7 @@ export {
     Map,
     Piechart,
     CustomTable,
-    ProgressTracker
+    ProgressTracker,
+    SyncfusionPertchart,
+    SvgPertchart
 }
