@@ -2,7 +2,7 @@ const stage = [
     "Commissioned",
     "Programming",
     "Collection",
-    "QA Check",
+    "QA",
     "Delivery"
 ]
 

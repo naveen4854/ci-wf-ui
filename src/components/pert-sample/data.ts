@@ -74,7 +74,7 @@ const data = [
         id: 5,
         stage: "Decipher",
         categoryId: 3,
-        pId: [2],
+        pId: [8],
         status: "delayed",
         x: 0,
         y: 0,
@@ -111,7 +111,22 @@ const data = [
             endDate: "5-3-2001",
             info: "This gives us the info about the project status"
         }
+    },
+    {
+        id: 8,
+        stage: "Decipher",
+        categoryId: 2,
+        pId: [0],
+        status: "Completed",
+        x: 0,
+        y: 0,
+        text: {
+            startDate: "29-3-1993",
+            endDate: "5-3-2001",
+            info: "This gives us the info about the project status"
+        }
     }
-]
+    
+].sort((a,b)=>a.categoryId-b.categoryId);
 
 export default data;
