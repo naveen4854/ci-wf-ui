@@ -192,7 +192,7 @@ const header = (header: string, x: number, y: number) => {
 const colorLegend = (color: string, state: string, x: number, y: number) => {
     return <g>
         <rect width={20} height={10} x={x} y={y} style={{ fill: color }} />
-        <text x={x + 20} y={y} fill="black">{state}</text>
+        <text x={x + 25} y={y+10} fill="black">{state}</text>
     </g>
 }
 
@@ -290,10 +290,10 @@ const SvgPertchart: React.FC = () => {
     }
 
     const getLegends = () => {
-        dimension = { x: 650, y: 0, width: 150, height: 100, gap: 100 }
+        dimension = { x: 900, y: 0, width: 150, height: 100, gap: 100 }
         return legend.map(legend => {
             dimension.x = dimension.x + dimension.gap;
-            dimension.y = 650;
+            dimension.y = 500;
             return colorLegend(legend.color, legend.stage, dimension.x, dimension.y);
         })
     }
