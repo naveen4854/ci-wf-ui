@@ -1,12 +1,14 @@
 import React from 'react';
 import './pert.scss'
 import data from './data';
-import stages from './stages'
+import stages from './stages';
+import legend from './legend'
 
 
 const PertSample2: React.FC = () => {
     const rectwidth = 150, rectheight = 120, gapX = 100, gapY = 50, strokeWidth = 2, headergap = rectwidth + gapX, headerheight = 20;
-    let count = 0, value = data[0].categoryId, defx = 0, defy = 0, text = null, hx = 0, hy = 0, color = '';
+    let count = 0, value = data[0].categoryId, defx = 0, defy = 0, text = null, hx = 0, hy = 0, color = '', legendx=950, legendy=0,
+    legendgap=100;
 
     const renderRect = (rectWidth: number, rectHeight: number, rectX: number, rectY: number, text: any, stage: string, color: string) => {
         return <svg x={rectX} y={rectY} fill='pink' >
@@ -56,10 +58,24 @@ const PertSample2: React.FC = () => {
         return <text id="headers" x={x} y={y} fill="black">{header}</text>
     }
 
+    const colorLegend = (color: string, state: string, x: number, y: number) => {
+        return <g><rect width={20} height={10} x={x} y={y}
+        style={{ fill: color }} />
+        <text x={x+20} y={y} fill="black">{state}</text>
+        </g>
+    }
+    
+
     return (
         <div style={{ margin: 0, height: '100vh', width: '100vw', overflow: 'scroll' }}>
             <svg width="120vw" height="100vh" overflow='visible'>
-
+                {
+                    legend.map((l)=>{
+                        legendx=legendx+legendgap;
+                        legendy=650;
+                        return colorLegend(l.color, l.stage, legendx, legendy);
+                    })
+                }
                 {
                     stages.map((s, index) => {
                         hy = rectheight - headerheight;

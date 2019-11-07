@@ -63,7 +63,7 @@ const ProgressTracker: React.FC = (props: any) => {
       <div className="row" style={{display:'flex', justifyContent:'space-between', margin:'auto' }}>
       <h4>Project {props.location.state.id} Status Tracker</h4>
       <Link to={{
-        pathname: '/',
+        pathname: '/dashboard',
       }}>Click here to go Back</Link> 
       </div>
       <CardGroup>
