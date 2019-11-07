@@ -8,7 +8,7 @@ import legend from './legend'
 const PertSample2: React.FC = () => {
     const rectwidth = 150, rectheight = 120, gapX = 100, gapY = 50, strokeWidth = 2, headergap = rectwidth + gapX, headerheight = 20;
     let count = 0, value = data[0].categoryId, defx = 0, defy = 0, text = null, hx = 0, hy = 0, color = '', legendx=950, legendy=0,
-    legendgap=100;
+    legendgap=120;
 
     const renderRect = (rectWidth: number, rectHeight: number, rectX: number, rectY: number, text: any, stage: string, color: string) => {
         return <svg x={rectX} y={rectY} fill='pink' >
@@ -55,13 +55,13 @@ const PertSample2: React.FC = () => {
     }
 
     const header = (header: string, x: number, y: number) => {
-        return <text id="headers" x={x} y={y} fill="black">{header}</text>
+        return <text id="headers" x={x} y={y} fill="black">{header} Stage</text>
     }
 
     const colorLegend = (color: string, state: string, x: number, y: number) => {
-        return <g><rect width={20} height={10} x={x} y={y}
+        return <g><rect width={23} height={10} x={x} y={y}
         style={{ fill: color }} />
-        <text x={x+20} y={y} fill="black">{state}</text>
+        <text x={x+25} y={y+10} id="legend">{state}</text>
         </g>
     }
     
