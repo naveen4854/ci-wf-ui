@@ -123,7 +123,7 @@ const stageNames = [
     "Commissioned Stage",
     "Programming Stage",
     "Collection Stage",
-    "QA Check Stage",
+    "QA Stage",
     "Delivery Stage"
 ]
 
@@ -193,11 +193,11 @@ const colorLegend = (color: string, state: string, x: number, y: number) => {
 
 const SvgPertchart: React.FC = () => {
 
-    var dimension = { x: 0, y: 0, width: 150, height: 120, gap: 70 };
+    var dimension = { x: 0, y: 0, width: 150, height: 120, hgap: 90, vgap: 70 };
     const midPoints: Map<number, IPoint> = new Map();
 
     const getStages = () => {
-        dimension = { x: 0, y: 40, width: 150, height: 120, gap: 70 };
+        dimension = { x: 0, y: 70, width: 150, height: 120, hgap: 90, vgap: 70 };
         return stages.map(stage => getChildren(stage.children));
     }
 
@@ -211,10 +211,12 @@ const SvgPertchart: React.FC = () => {
         return children.map((child: any, index: number) => {
 
             if (index === 0) {
-                dimension.x = dimension.x + dimension.width + dimension.gap;
-                dimension.y = 40
+                if (child.parentId.length > 0) {
+                    dimension.x = dimension.x + dimension.width + dimension.hgap;
+                    dimension.y = 70
+                }
             } else {
-                dimension.y = dimension.y + dimension.height + dimension.gap;
+                dimension.y = dimension.y + dimension.height + dimension.vgap;
             }
 
             let x1 = dimension.x + dimension.width;
@@ -247,7 +249,7 @@ const SvgPertchart: React.FC = () => {
     }
 
     const getLines = () => {
-        dimension = { x: 0, y: 0, width: 150, height: 120, gap: 70 };
+        dimension = { x: 0, y: 70, width: 150, height: 120, hgap: 90, vgap: 70 };
         return stages.map(stage => getLineChildren(stage.children));
     }
 
@@ -255,10 +257,12 @@ const SvgPertchart: React.FC = () => {
         return children.map((child: any, index: number) => {
 
             if (index === 0) {
-                dimension.x = dimension.x + dimension.width + dimension.gap;
-                dimension.y = 40
+                if (child.parentId.length > 0) {
+                    dimension.x = dimension.x + dimension.width + dimension.hgap;
+                    dimension.y = 70
+                }
             } else {
-                dimension.y = dimension.y + dimension.height + dimension.gap;
+                dimension.y = dimension.y + dimension.height + dimension.vgap;
             }
 
             let target = getMidpoint(dimension.x, dimension.y, dimension.x, dimension.y + dimension.height)
@@ -272,22 +276,22 @@ const SvgPertchart: React.FC = () => {
     }
 
     const getStageNames = () => {
-        dimension = { x: 0, y: 0, width: 150, height: 100, gap: 70 }
+        dimension = { x: 0, y: 25, width: 150, height: 100, hgap: 90, vgap: 70}
         return stageNames.map((name, index) => {
             if (index === 0) {
-                dimension.x = dimension.x + 220;
+                dimension.x = dimension.x;
             } else {
-                dimension.x = dimension.x + dimension.width + dimension.gap;
+                dimension.x = dimension.x + dimension.width + dimension.hgap;
             }
             return Header(name, dimension.x, dimension.y + 20);
         });
     }
 
     const getLegends = () => {
-        dimension = { x: 900, y: 0, width: 150, height: 100, gap: 100 }
+        dimension = { x: 750, y: 0, width: 150, height: 100, hgap: 100, vgap: 70 }
         return legend.map(legend => {
-            dimension.x = dimension.x + dimension.gap;
-            dimension.y = 500;
+            dimension.x = dimension.x + dimension.hgap;
+            dimension.y = 550;
             return colorLegend(legend.color, legend.stage, dimension.x, dimension.y);
         })
     }
