@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { CSSProperties } from 'react';
 
 const stages = [
     {
@@ -147,10 +147,7 @@ interface ISvgRectangle {
     y: number,
     width: number,
     height: number,
-    stroke?: string,
-    strokeWidth?: number,
-    fill?: string,
-    opacity?: number
+    style?: CSSProperties
 }
 
 interface ISvgLine {
@@ -158,8 +155,7 @@ interface ISvgLine {
     y1: number,
     x2: number,
     y2: number,
-    stroke?: string,
-    strokeWidth?: number
+    style?: CSSProperties
 }
 
 interface IPoint {
@@ -176,7 +172,7 @@ const Line: React.FC<ISvgLine> = (props) => {
         <React.Fragment>
             <defs>
                 <marker id="arrow" markerWidth="10" markerHeight="10" refX="8.5" refY="3" orient="auto" markerUnits="strokeWidth">
-                    <path d="M0,0 L0,6 L9,3 z" fill={props.stroke} />
+                    <path d="M0,0 L0,6 L9,3 z" style={props.style} />
                 </marker>
             </defs>
             <line {...props} markerEnd="url(#arrow)" />
@@ -184,14 +180,13 @@ const Line: React.FC<ISvgLine> = (props) => {
     )
 }
 
-const header = (header: string, x: number, y: number) => {
+const Header = (header: string, x: number, y: number) => {
     return <text id="headers" x={x} y={y} width={150} height={120} fill="black">{header}</text>
 }
 
-
 const colorLegend = (color: string, state: string, x: number, y: number) => {
     return <g>
-        <rect width={20} height={10} x={x} y={y} style={{ fill: color }} />
+        <Rectangle width={20} height={10} x={x} y={y} style={{ fill: color }} />
         <text x={x + 25} y={y+10} fill="black">{state}</text>
     </g>
 }
@@ -240,10 +235,9 @@ const SvgPertchart: React.FC = () => {
             return (
                 <React.Fragment key={child.id}>
                     <Rectangle x={dimension.x} y={dimension.y} width={dimension.width}
-                        height={dimension.height / 3} fill={color} stroke='black' strokeWidth={2} opacity={1} />
+                        height={dimension.height / 3} style={{ fill: color, stroke: 'black', strokeWidth: 2, opacity: 1}}/>
                     <Rectangle x={dimension.x} y={dimension.y + dimension.height / 3} width={dimension.width}
-                        height={2 * dimension.height / 3} fill='white' stroke='black' strokeWidth={2} opacity={1} />
-
+                        height={2 * dimension.height / 3} style={{ fill: 'white', stroke: 'black', strokeWidth: 2, opacity: 1}}/>
                     <text x={dimension.x + 10} y={dimension.y + 30} overflow="hidden" fill="white">{child.stage}</text>
                     <text x={dimension.x + 10} y={dimension.y + 70} overflow="hidden" fill="black">Start Date: {child.startDate} </text>
                     <text x={dimension.x + 10} y={dimension.y + 90} overflow="hidden" fill="black">End Date: {child.endDate}</text>
@@ -252,7 +246,7 @@ const SvgPertchart: React.FC = () => {
         });
     }
 
-    const getLineStages = () => {
+    const getLines = () => {
         dimension = { x: 0, y: 0, width: 150, height: 120, gap: 70 };
         return stages.map(stage => getLineChildren(stage.children));
     }
@@ -271,7 +265,7 @@ const SvgPertchart: React.FC = () => {
             var lines: any[] = [];
             for (const pid  of child.parentId) {
                 const midPoint = midPoints.get(pid);
-                lines.push(midPoint && <Line key={child.id} x1={midPoint.x} y1={midPoint.y} x2={target.x} y2={target.y} stroke="black" strokeWidth={1.5} />)
+                lines.push(midPoint && <Line key={child.id} x1={midPoint.x} y1={midPoint.y} x2={target.x} y2={target.y} style={{stroke: "black", strokeWidth: 1.3}} />)
             };
             return lines;
         });
@@ -285,7 +279,7 @@ const SvgPertchart: React.FC = () => {
             } else {
                 dimension.x = dimension.x + dimension.width + dimension.gap;
             }
-            return header(name, dimension.x, dimension.y + 20);
+            return Header(name, dimension.x, dimension.y + 20);
         });
     }
 
@@ -304,7 +298,7 @@ const SvgPertchart: React.FC = () => {
             <svg width="1500" height="1500">
                 {getStageNames()}
                 {getStages()}
-                {getLineStages()}
+                {getLines()}
                 {getLegends()}
             </svg>
         </div>
