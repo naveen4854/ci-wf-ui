@@ -120,11 +120,11 @@ const stages = [
 ]
 
 const stageNames = [
-    "Commissioned",
-    "Programming",
-    "Collection",
-    "QA Check",
-    "Delivery"
+    "Commissioned Stage",
+    "Programming Stage",
+    "Collection Stage",
+    "QA Check Stage",
+    "Delivery Stage"
 ]
 
 const legend = [
