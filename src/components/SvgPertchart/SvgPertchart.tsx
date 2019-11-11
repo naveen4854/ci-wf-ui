@@ -1,4 +1,6 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, useState } from 'react';
+import Popup from "../Popup/Popup";
+import history from '../../routes/History';
 
 const stages = [
     {
@@ -184,17 +186,19 @@ const Header = (header: string, x: number, y: number) => {
     return <text id="headers" x={x} y={y} width={150} height={120} fill="black">{header}</text>
 }
 
-const colorLegend = (color: string, state: string, x: number, y: number) => {
+const colorLegend = (id: number, color: string, state: string, x: number, y: number) => {
     return <g>
-        <Rectangle width={20} height={10} x={x} y={y} style={{ fill: color }} />
+        <Rectangle key={id} width={20} height={10} x={x} y={y} style={{ fill: color }} />
         <text x={x + 25} y={y+10} fill="black">{state}</text>
     </g>
 }
 
-const SvgPertchart: React.FC = () => {
+const SvgPertchart: React.FC = (props) => {
 
     var dimension = { x: 0, y: 0, width: 150, height: 120, hgap: 90, vgap: 70 };
     const midPoints: Map<number, IPoint> = new Map();
+
+    const [showPopup, setShowPopup] = useState(false);
 
     const getStages = () => {
         dimension = { x: 0, y: 70, width: 150, height: 120, hgap: 90, vgap: 70 };
@@ -205,6 +209,20 @@ const SvgPertchart: React.FC = () => {
         let x = (x1 + x2) / 2;
         let y = (y1 + y2) / 2;
         return { x, y };
+    }
+
+    const handleStageClick = (event: any, id: number) => {
+        event.preventDefault();
+        setShowPopup(true);
+    }
+
+    const handleOnClose = () => {
+        setShowPopup(false);
+    }
+
+    const handleOnEdit = () => {
+        setShowPopup(false);
+        history.push('/stage-details');
     }
 
     const getChildren = (children: any) => {
@@ -235,15 +253,18 @@ const SvgPertchart: React.FC = () => {
             }
 
             return (
-                <React.Fragment key={child.id}>
-                    <Rectangle x={dimension.x} y={dimension.y} width={dimension.width}
-                        height={dimension.height / 3} style={{ fill: color, stroke: 'black', strokeWidth: 2, opacity: 1}}/>
-                    <Rectangle x={dimension.x} y={dimension.y + dimension.height / 3} width={dimension.width}
-                        height={2 * dimension.height / 3} style={{ fill: 'white', stroke: 'black', strokeWidth: 2, opacity: 1}}/>
+                <g onClick={(event) => { handleStageClick(event, child.id) }} key={child.id}>
+                    <Rectangle
+                        x={dimension.x} y={dimension.y} width={dimension.width}
+                        height={dimension.height / 3}
+                        style={{ fill: color, stroke: 'black', strokeWidth: 2, opacity: 1 }} />
+                    <Rectangle
+                        x={dimension.x} y={dimension.y + dimension.height / 3} width={dimension.width}
+                        height={2 * dimension.height / 3} style={{ fill: 'white', stroke: 'black', strokeWidth: 2, opacity: 1 }} />
                     <text x={dimension.x + 10} y={dimension.y + 30} overflow="hidden" fill="white">{child.stage}</text>
                     <text x={dimension.x + 10} y={dimension.y + 70} overflow="hidden" fill="black">Start Date: {child.startDate} </text>
                     <text x={dimension.x + 10} y={dimension.y + 90} overflow="hidden" fill="black">End Date: {child.endDate}</text>
-                </React.Fragment>
+                </g>
             );
         });
     }
@@ -289,16 +310,19 @@ const SvgPertchart: React.FC = () => {
 
     const getLegends = () => {
         dimension = { x: 750, y: 0, width: 150, height: 100, hgap: 100, vgap: 70 }
-        return legend.map(legend => {
+        return legend.map((legend, index) => {
             dimension.x = dimension.x + dimension.hgap;
             dimension.y = 550;
-            return colorLegend(legend.color, legend.stage, dimension.x, dimension.y);
+            return colorLegend(index, legend.color, legend.stage, dimension.x, dimension.y);
         })
     }
 
     const style = { margin: 65 };
     return (
         <div style={style} className="svg-container">
+            <Popup showPopup={showPopup} onClose={handleOnClose} onEdit={handleOnEdit} >
+                
+            </Popup>
             <svg width="1500" height="1500">
                 {getStageNames()}
                 {getStages()}
@@ -310,3 +334,4 @@ const SvgPertchart: React.FC = () => {
 }
 
 export default SvgPertchart;
+

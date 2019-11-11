@@ -8,6 +8,7 @@ import CustomTable from "./CustomTable/CustomTable";
 import ProgressTracker from "./ProgressTracker/ProgressTracker";
 import SyncfusionPertchart from "./SyncfusionPERT/SyncfusionPertchart";
 import SvgPertchart from "./SvgPertchart/SvgPertchart";
+import StageDetails from "./Stage/StageDetails";
 
 export {
     App,
@@ -19,5 +20,6 @@ export {
     CustomTable,
     ProgressTracker,
     SyncfusionPertchart,
-    SvgPertchart
+    SvgPertchart,
+    StageDetails
 }
