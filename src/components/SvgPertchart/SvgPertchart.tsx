@@ -1,6 +1,7 @@
 import React, { CSSProperties, useState } from 'react';
 import Popup from "../Popup/Popup";
 import history from '../../routes/History';
+import './svg.scss'
 
 const stages = [
     {
@@ -16,6 +17,11 @@ const stages = [
                 status: "completed",
                 startDate: "29-3-1993",
                 endDate: "5-3-2001",
+                type: "Qualitative",
+                studyFrequency: " Tracking",
+                fieldMethodology: "B2B-FTF",
+                prerecruitmentInvolved: "yes",
+                prerecruitmentMethod: "DTD"
             }
         ]
     },
@@ -32,6 +38,11 @@ const stages = [
                 status: "progress",
                 startDate: "29-3-1993",
                 endDate: "5-3-2001",
+                type: "Quantitative",
+                studyFrequency: " Tracking",
+                fieldMethodology: "B2B-FTF",
+                prerecruitmentInvolved: "yes",
+                prerecruitmentMethod: "CLT"
             },
             {
                 id: 22,
@@ -41,6 +52,11 @@ const stages = [
                 status: "completed",
                 startDate: "29-3-1993",
                 endDate: "5-3-2001",
+                type: "Qualitative",
+                studyFrequency: " Tracking",
+                fieldMethodology: "B2B-TEL",
+                prerecruitmentInvolved: "yes",
+                prerecruitmentMethod: "TEL"
             },
             {
                 id: 23,
@@ -49,7 +65,12 @@ const stages = [
                 parentId: [11],
                 status: "delayed",
                 startDate: "29-3-1993",
-                endDate: "5-3-2001"
+                endDate: "5-3-2001",
+                type: "Qualitative",
+                studyFrequency: " Tracking",
+                fieldMethodology: "B2B-FTF",
+                prerecruitmentInvolved: "yes",
+                prerecruitmentMethod: "DTD"
             }
         ]
     },
@@ -66,6 +87,11 @@ const stages = [
                 status: "completed",
                 startDate: "29-3-1993",
                 endDate: "5-3-2001",
+                type: "Qualitative",
+                studyFrequency: " Tracking",
+                fieldMethodology: "B2B-TEL",
+                prerecruitmentInvolved: "yes",
+                prerecruitmentMethod: "TEL"
             },
             {
                 id: 32,
@@ -75,6 +101,11 @@ const stages = [
                 status: "completed",
                 startDate: "29-3-1993",
                 endDate: "5-3-2001",
+                type: "Quantitative",
+                studyFrequency: " Tracking",
+                fieldMethodology: "B2B-FTF",
+                prerecruitmentInvolved: "yes",
+                prerecruitmentMethod: "CLT"
             },
             {
                 id: 33,
@@ -84,6 +115,11 @@ const stages = [
                 status: "delayed",
                 startDate: "29-3-1993",
                 endDate: "5-3-2001",
+                type: "Qualitative",
+                studyFrequency: " Tracking",
+                fieldMethodology: "B2B-TEL",
+                prerecruitmentInvolved: "yes",
+                prerecruitmentMethod: "TEL"
             }
         ]
     },
@@ -100,6 +136,11 @@ const stages = [
                 status: "progress",
                 startDate: "29-3-1993",
                 endDate: "5-3-2001",
+                type: "Quantitative",
+                studyFrequency: " Tracking",
+                fieldMethodology: "B2B-FTF",
+                prerecruitmentInvolved: "yes",
+                prerecruitmentMethod: "CLT"
             }
         ]
     },
@@ -116,6 +157,11 @@ const stages = [
                 status: "progress",
                 startDate: "29-3-1993",
                 endDate: "5-3-2001",
+                type: "Qualitative",
+                studyFrequency: " Tracking",
+                fieldMethodology: "B2B-FTF",
+                prerecruitmentInvolved: "yes",
+                prerecruitmentMethod: "DTD"
             }
         ]
     }
@@ -199,6 +245,7 @@ const SvgPertchart: React.FC = (props) => {
     const midPoints: Map<number, IPoint> = new Map();
 
     const [showPopup, setShowPopup] = useState(false);
+    const [stageDetails, setStageDetails] = useState<any | undefined>({});
 
     const getStages = () => {
         dimension = { x: 0, y: 70, width: 150, height: 120, hgap: 90, vgap: 70 };
@@ -211,9 +258,10 @@ const SvgPertchart: React.FC = (props) => {
         return { x, y };
     }
 
-    const handleStageClick = (event: any, id: number) => {
+    const handleStageClick = (event: any, child: any) => {
         event.preventDefault();
         setShowPopup(true);
+        setStageDetails(child);
     }
 
     const handleOnClose = () => {
@@ -253,7 +301,7 @@ const SvgPertchart: React.FC = (props) => {
             }
 
             return (
-                <g onClick={(event) => { handleStageClick(event, child.id) }} key={child.id}>
+                <g onClick={(event) => { handleStageClick(event, child) }} key={child.id}>
                     <Rectangle
                         x={dimension.x} y={dimension.y} width={dimension.width}
                         height={dimension.height / 3}
@@ -320,9 +368,30 @@ const SvgPertchart: React.FC = (props) => {
     const style = { margin: 65 };
     return (
         <div style={style} className="svg-container">
-            <Popup showPopup={showPopup} onClose={handleOnClose} onEdit={handleOnEdit} >
-                
+           { showPopup && stageDetails &&
+                <Popup showPopup={showPopup} onClose={handleOnClose} onEdit={handleOnEdit} title={stageDetails.stage} >
+                    <div className="row">
+                        <div className="col-5" id="key">
+                            Type<br/>
+                            Frequency<br/>
+                            Field Methodology<br/>
+                            Prerecruitment Involved<br/>
+                            Prerecruitment Method
+                        </div>
+                        <div className="col-sm-1">
+                            :<br/>:<br/>:<br/>:<br/>:<br/>
+                        </div>
+                         
+                        <div className="col-6" id="value">
+                            {stageDetails.type}<br/>
+                            {stageDetails.studyFrequency}<br/>
+                            {stageDetails.fieldMethodology}<br/>
+                            {stageDetails.prerecruitmentInvolved}<br/>
+                            {stageDetails.prerecruitmentMethod}
+                        </div>
+                    </div>
             </Popup>
+            }
             <svg width="1500" height="1500">
                 {getStageNames()}
                 {getStages()}
