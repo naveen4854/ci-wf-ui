@@ -1,0 +1,222 @@
+@import '../../assets/css/_colors.scss';
+
+// .navbar {
+//     padding: 0 30px;
+//     .navbar-brand{
+//         padding: 0px;
+//         margin-right: 3rem;
+
+//         img{
+//             height: 40px;
+//         }
+//     }
+//     .nav-item{
+//         border: 1px solid transparent;
+//         .nav-link{
+//             color: #979898;
+//             padding: 31px 15px;
+//             i.fa-user-circle{
+//                 font-size: 20px;
+//                 vertical-align: text-bottom;
+//             } 
+//         }   
+
+//     }
+//     li.nav-item:hover> a.nav-link{
+//         color: #333;
+//     }
+
+
+
+//     li.nav-item > .active{
+//         border-color: #f3f3f3;
+//         background-color: #fafafa;
+//         color: #333;
+//     }
+// }
+
+// .navbar-nav > li:hover {
+//     border-color: #f3f3f3;
+//     background-color: #fafafa;
+    
+// }
+
+.header-block{
+    width: 100%;
+    height: 55px;
+    border-top: 5px solid $blue;
+    box-Shadow: 0px 2px 3px rgba(0,0,0,.25);
+    padding: 4px 15px;
+    color:#354052;
+
+    span.logo{
+        font-size: 18px;
+
+        a.navbar-brand{
+            margin-right: 0px;
+            padding-top: 4px;
+        }
+    }
+
+    span.title{
+        font-size: 20px;
+        color: #354052;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-left: 15px;
+        vertical-align: middle;
+    }
+
+    .p-button{
+        border-radius: 0px;
+        background-color: transparent;
+        border: 1px solid transparent;
+        font-size: 18px;
+        color:#354052;
+        margin-right: 10px;
+
+        .p-button-text {
+            padding: 10px 15px 10px 25px;
+        }
+
+        &:hover {
+            background-color: transparent;
+            color: $white;
+            border-color: transparent;
+        }
+        &:enabled:hover {
+            background-color: transparent;
+            color: #354052;
+            border-color: transparent;
+        }
+
+        &.p-button-icon-only {
+            width: auto;
+            margin-left: -5px;
+            box-shadow: none !important;
+            .p-button-text {
+                padding: 0px;
+            }
+        }
+    }
+
+    .p-sidebar{
+        padding: 15px 0;
+        width: auto;
+        min-width: 280px;
+        margin-top: 55px;
+        box-shadow:none;
+        
+        
+        .p-sidebar-close{
+            margin-top: 5px;
+            display: none;
+        }
+    }
+    .navigation{
+        a{
+            font-size: 14px;
+            color:#354052;
+
+            &:hover{
+                background: #EDEEF0;
+            }
+        }
+
+        .dropdown{
+            height: auto;
+            .arrow{
+                float: right;
+                font-size: 20px;
+            }
+
+            .dropdown-toggle{
+                &:after{
+                    border: 0px;
+                }
+            }
+
+            &.show{
+                .dropdown-toggle{
+                    background: #EDEEF0 !important;
+                }
+            }
+        }
+        
+    }
+}
+.linecons-cog{
+    margin-right: 10px;
+}
+
+.user-block{
+    a.nav-link{
+        color: #354052;
+        padding: 10px;
+        i.fa-user-circle-o{
+            font-size: 22px;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+
+        i.fa-angle-down{
+            font-size: 16px;
+            vertical-align: middle;
+            margin-left: 5px;
+        }
+    }
+}
+
+a.active{
+    background: #EDEEF0;
+}
+
+.dropdown-menu{
+        display: none;
+        padding: 0;
+        width: 100%;
+        border: 0px;
+        margin: 0px;
+        transform: translate3d(0, 0, 0px) !important;
+
+    a.dropdown-item{
+        padding:8px 50px;
+        border-bottom: 0px;
+        i{
+            margin-right: 5px;
+        }
+    }
+    a.dropdown-item:hover{
+        color: #333;
+        background: #EDEEF0;
+    }
+    
+    a.dropdown-item:last-child{
+        border-bottom: 0px;
+    }
+
+    &.show{
+        margin-top: 38px !important;
+    }
+}
+
+.right-filter-block{
+    position: fixed;
+    z-index: 1500;
+    .p-button{
+        background: $blue;
+        border-radius: 0px !important;
+        border: 0px;
+        box-shadow: 0px !important;
+    }
+    .p-sidebar{
+        margin-top: 56px;
+    }
+    .p-button.p-button-icon-only .p-button-text {
+        padding: 8px 0 5px 0;
+    }
+}
+
+
+
+  

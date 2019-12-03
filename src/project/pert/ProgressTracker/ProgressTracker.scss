@@ -1,0 +1,94 @@
+.progress-card-deck {
+	position: relative;
+	margin-top: 100px;
+    width: calc(100% - 30px);
+    padding: 0 20px;
+  
+	.progress-card{
+	  border: none;
+	  .card-body{
+	  padding: 10px 20px;
+	  border-top: 0px;
+	  border-radius: 10px
+	  }
+  
+	  
+	  .progress-card-header{
+		border: none;
+		border-radius: 0px;
+		position: relative;
+		padding-right: 30px;
+		padding-bottom: 15px;
+		padding-left: 40px;
+		margin-bottom: 0px;
+		
+		&::after{
+		  content: '';
+		  border: 24px solid;
+		  position: absolute;
+		  border-color: transparent;
+		  top: 0;
+		  bottom: 0;
+		  left: 100%;
+		  z-index: 1;
+		}
+		
+	  }
+	  &:nth-child(1){
+		.progress-card-header{
+		  background-color: #0944a1;
+		  color: #fff;
+
+		  
+		  &::after{
+			border-left-color: #0944a1;
+		  }
+		  
+		}
+	  }
+	  &:nth-child(2){
+		.progress-card-header{
+		  background-color: #0c58d3;
+		  color: #fff;
+		  
+		  &::after{
+			border-left-color: #0c58d3;
+		  }
+		 
+		}
+	  }
+	  &:nth-child(3){
+		.progress-card-header{
+		background-color: #0d5ddf;
+		color: #fff;
+		
+		&::after{
+		  border-left-color: #0d5ddf;
+		}
+		
+	  }
+	  }
+	  &:nth-child(4){
+		.progress-card-header{
+		background-color: #0e65f0;
+		color: #fff;
+		
+		&::after{
+		  border-left-color: #0e65f0;
+		}
+		
+	  }
+	  }
+	  &:nth-child(5){
+		.progress-card-header{
+		background-color: #307bf3;
+		color: #fff;
+		
+		&::after{
+		  border-left-color: #307bf3;
+		}
+		
+	  }
+	  }
+  }
+  }
