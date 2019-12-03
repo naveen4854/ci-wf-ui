@@ -3,7 +3,7 @@ import { Route, Router, Switch } from 'react-router-dom';
 import history from './History';
 import Dashboard from 'src/dashboard/dashboard';
 import { Header, Footer } from 'src/shared-components';
-import { SyncfusionPertchart, SvgPertchart, ProgressTracker } from 'src/project/pert';
+import { SyncfusionPertchart, SvgPertchart, ProgressTracker } from 'src/project-details/pert';
 
 const Routes = () => {
   return (

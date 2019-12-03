@@ -34,7 +34,7 @@ const Header: React.FC = () => {
 
                             <Button icon="fa fa-bars" label="" onClick={hideFilterIcon}> </Button>
                             <span className="logo">
-                                <a className="navbar-brand" href="/"> <img src={require("../../assets/images/icons/n_square.svg")} alt="logo" /></a>
+                                <a className="navbar-brand" href="/"> <img src={require("../../common/assets/images/icons/n_square.svg")} alt="logo" /></a>
                             </span>
                             <span className="title">CI WF</span>
                         </div>
