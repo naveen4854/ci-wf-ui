@@ -60,11 +60,11 @@ const ProgressTracker: React.FC = (props: any) => {
   console.log(props, 'iiii');
   return (
     <div className="progress-card-deck">
-      <div className="row" style={{display:'flex', justifyContent:'space-between', margin:'auto' }}>
-      <h4>Project {props.location.state.id} Status Tracker</h4>
-      <Link to={{
-        pathname: '/dashboard',
-      }}>Click here to go Back</Link> 
+      <div className="row" style={{ display: 'flex', justifyContent: 'space-between', margin: 'auto' }}>
+        <h4>Project {props.location.state.id} Status Tracker</h4>
+        <Link to={{
+          pathname: '/dashboard',
+        }}>Click here to go Back</Link>
       </div>
       <CardGroup>
         <Card className="progress-card">

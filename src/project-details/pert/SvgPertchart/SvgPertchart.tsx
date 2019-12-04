@@ -1,6 +1,6 @@
 import React, { CSSProperties, useState } from 'react';
-import Popup from "../Popup/Popup";
-import history from '../../routes/History';
+import { Popup } from "src/shared-components";
+import history from 'src/routes/History';
 import './svg.scss'
 
 const stages = [
@@ -178,15 +178,15 @@ const stageNames = [
 const legend = [
     {
         stage: "Completed",
-        color:  "#447733"
+        color: "#447733"
     },
     {
         stage: "In Progress",
-        color:  "#FFBF00"
+        color: "#FFBF00"
     },
     {
         stage: "Delayed",
-        color:  "#DD0014"
+        color: "#DD0014"
     }
 ]
 
@@ -235,7 +235,7 @@ const Header = (header: string, x: number, y: number) => {
 const colorLegend = (id: number, color: string, state: string, x: number, y: number) => {
     return <g>
         <Rectangle key={id} width={20} height={10} x={x} y={y} style={{ fill: color }} />
-        <text x={x + 25} y={y+10} fill="black">{state}</text>
+        <text x={x + 25} y={y + 10} fill="black">{state}</text>
     </g>
 }
 
@@ -336,16 +336,16 @@ const SvgPertchart: React.FC = (props) => {
 
             let target = getMidpoint(dimension.x, dimension.y, dimension.x, dimension.y + dimension.height)
             var lines: any[] = [];
-            for (const pid  of child.parentId) {
+            for (const pid of child.parentId) {
                 const midPoint = midPoints.get(pid);
-                lines.push(midPoint && <Line key={child.id} x1={midPoint.x} y1={midPoint.y} x2={target.x} y2={target.y} style={{stroke: "black", strokeWidth: 1.3}} />)
+                lines.push(midPoint && <Line key={child.id} x1={midPoint.x} y1={midPoint.y} x2={target.x} y2={target.y} style={{ stroke: "black", strokeWidth: 1.3 }} />)
             };
             return lines;
         });
     }
 
     const getStageNames = () => {
-        dimension = { x: 0, y: 25, width: 150, height: 100, hgap: 90, vgap: 70}
+        dimension = { x: 0, y: 25, width: 150, height: 100, hgap: 90, vgap: 70 }
         return stageNames.map((name, index) => {
             if (index === 0) {
                 dimension.x = dimension.x;
@@ -368,29 +368,29 @@ const SvgPertchart: React.FC = (props) => {
     const style = { margin: 65 };
     return (
         <div style={style} className="svg-container">
-           { showPopup && stageDetails &&
+            {showPopup && stageDetails &&
                 <Popup showPopup={showPopup} onClose={handleOnClose} onEdit={handleOnEdit} title={stageDetails.stage} >
                     <div className="row">
                         <div className="col-5" id="key">
-                            Type<br/>
-                            Frequency<br/>
-                            Field Methodology<br/>
-                            Prerecruitment Involved<br/>
+                            Type<br />
+                            Frequency<br />
+                            Field Methodology<br />
+                            Prerecruitment Involved<br />
                             Prerecruitment Method
                         </div>
                         <div className="col-sm-1">
-                            :<br/>:<br/>:<br/>:<br/>:<br/>
+                            :<br />:<br />:<br />:<br />:<br />
                         </div>
-                         
+
                         <div className="col-6" id="value">
-                            {stageDetails.type}<br/>
-                            {stageDetails.studyFrequency}<br/>
-                            {stageDetails.fieldMethodology}<br/>
-                            {stageDetails.prerecruitmentInvolved}<br/>
+                            {stageDetails.type}<br />
+                            {stageDetails.studyFrequency}<br />
+                            {stageDetails.fieldMethodology}<br />
+                            {stageDetails.prerecruitmentInvolved}<br />
                             {stageDetails.prerecruitmentMethod}
                         </div>
                     </div>
-            </Popup>
+                </Popup>
             }
             <svg width="1500" height="1500">
                 {getStageNames()}

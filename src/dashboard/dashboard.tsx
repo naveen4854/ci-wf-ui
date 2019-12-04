@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import ReactTooltip from "react-tooltip";
-import './Dashboard.scss';
-import { Map, Piechart, CustomTable } from "../index";
+import './dashboard.scss';
+import { Map, Piechart, CustomTable } from "src/shared-components";
+import { useSelector } from 'react-redux';
+import Authenticate from 'src/authentication/authentication';
 
 const Dashboard: React.FC = () => {
+    Authenticate(['admin']);
+
+    let user1 = useSelector((state: any) => { console.log(state.user, 'state'); return state.user });
+
     const [state, setState] = useState({
         selectedCountry: '',
         countries: [{
