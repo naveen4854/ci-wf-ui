@@ -29,6 +29,9 @@ const Header: React.FC = () => {
                                     <NavLink exact activeClassName="active" className="nav-link" to={'/dashboard'} onClick={hideNavSidebar}>
                                         <i className="linecons-cog fa fa-cog"></i><span>Dashboard</span>
                                     </NavLink>
+                                    <NavLink exact activeClassName="active" className="nav-link" to={'/user-management'} onClick={hideNavSidebar}>
+                                        <i className="linecons-cog fa fa-cog"></i><span>User Management</span>
+                                    </NavLink>
                                 </nav>
                             </Sidebar>
 

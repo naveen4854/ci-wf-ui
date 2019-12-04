@@ -39,7 +39,7 @@ const Dashboard: React.FC = () => {
     }
     return (
         <div>
-            <div className="container-fluid" style={{ marginTop: 50, paddingTop: 20, paddingBottom: 20 }}>
+            <div className="container-fluid" style={{ paddingBottom: 20 }}>
                 <div className='row'>
                     <div className='col-8'>
                         <Map countries={state.countries} onCountrySelected={countrySelected} setContent={setContent}></Map>
