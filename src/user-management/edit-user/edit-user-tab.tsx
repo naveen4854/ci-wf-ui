@@ -7,7 +7,7 @@ const dummyData = [{
     role: 'User',
     city: 'Chennai',
     country: 'India',
-    newColumn : true
+    newColumn: true
 },
 {
     id: 2,
@@ -15,7 +15,7 @@ const dummyData = [{
     role: 'Admin',
     city: 'Delhi',
     country: 'India',
-    newColumn : false
+    newColumn: false
 }]
 const columns = [
     { field: 'id', header: 'ID' },
@@ -25,19 +25,23 @@ const columns = [
     { field: 'newColumn', header: 'new Column' },
 ]
 
-const EditUserList = () => {
-    const userSelected = (e: any) => {
-        console.log(e);
-    }
+const EditUserTab = () => {
     return (
-        <DataTable
-            value={dummyData} paginator={true} rows={10}
-            selectionMode="single"
-            onRowClick={userSelected}
-            emptyMessage="No Users Found"
-            columns={columns}
-        />
+        <UsersList></UsersList>
     )
 };
 
-export default EditUserList;
+const UsersList = () => {
+    const userSelected = (e: any) => {
+        console.log(e);
+    }
+    return <DataTable
+        value={dummyData} paginator={true} rows={10}
+        selectionMode="single"
+        onRowClick={userSelected}
+        emptyMessage="No Users Found"
+        columns={columns}
+    />
+}
+
+export default EditUserTab;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TabMenu } from 'src/shared-components';
-import AddUserList from './add-user/add-user-list';
-import EditUserList from './edit-user/edit-user-list';
+import AddUserTab from './add-user/add-user-tab';
+import EditUserTab from './edit-user/edit-user-tab';
 
 const tabs = [
     { id: 'Add_User', label: 'Add User', icon: 'pi pi-fw pi-home' },
@@ -14,8 +14,8 @@ const UserManagementHome = () => {
     return <>
         <TabMenu tabs={tabs} tabChange={setCurrentTab} activeItem={currentTab || tabs[0]}>
         </TabMenu>
-        {currentTab.id === 'Add_User' && <AddUserList />}
-        {currentTab.id === 'Edit_User' && <EditUserList />}
+        {currentTab.id === 'Add_User' && <AddUserTab />}
+        {currentTab.id === 'Edit_User' && <EditUserTab />}
     </>
 }
 

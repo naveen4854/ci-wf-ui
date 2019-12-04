@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { DataTable } from 'src/shared-components';
+import Demo from './add-user-form';
 
 const dummyData = [{
     id: 1,
@@ -22,11 +23,21 @@ const columns = [
     { field: 'city', header: 'City' },
 ]
 
-const AddUserList = () => {
+const AddUserTab = () => {
+
+    return (
+        <UsersList />
+    )
+};
+
+const UsersList = () => {
     const userSelected = (e: any) => {
         console.log(e);
     }
-    return (
+    const [visible, setVisible] = useState(false);
+    return <>
+        {visible && <Demo onClose={() => setVisible(false)} visible={visible}></Demo>}
+        <button onClick={() => setVisible(true)}>click!!</button>
         <DataTable
             value={dummyData} paginator={true} rows={10}
             selectionMode="single"
@@ -34,7 +45,7 @@ const AddUserList = () => {
             emptyMessage="No Users Found"
             columns={columns}
         />
-    )
-};
+    </>
+}
 
-export default AddUserList;
+export default AddUserTab;
