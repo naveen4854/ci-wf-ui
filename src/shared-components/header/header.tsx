@@ -1,22 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Sidebar } from 'primereact/sidebar';
 import { Button } from 'primereact/button';
 import './header.scss';
+import UsersFilter from 'src/user-management/search/user-filter';
 
 const Header: React.FC = () => {
-    const [state, setState] = useState({
-        visibleLeft: false,
-        visible: false
+    const [hasFilterMenu, setHasFilterMenu] = useState(false);
+    const [sideMenuVisible, setSideMenuVisible] = useState(false);
+    const [filterIconVisible, setFilterIconVisible] = useState(true);
+    const [filterMenuVisible, setFilterMenuVisible] = useState(false);
+
+    const toggleSideMenu = () => {
+        setSideMenuVisible(!sideMenuVisible);
+        setFilterIconVisible(sideMenuVisible)
+    }
+
+    const toggleFilterMenu = () => {
+        setFilterMenuVisible(!filterMenuVisible)
+        setFilterIconVisible(filterMenuVisible)
+    }
+
+    const filterTemplate = () => {
+        switch (window.location.pathname) {
+            case '/dashboard':
+                return < h1 > dashboard</h1 >
+            case '/user-management':
+                return <UsersFilter />
+            default:
+                return <h1>none!</h1>
+        }
+    }
+
+    useEffect(() => {
+        const routeHasFilter = () => {
+            switch (window.location.pathname) {
+                case '/dashboard':
+                    return false
+                case '/user-management':
+                    return true
+                default:
+                    return false;
+            }
+        }
+        setHasFilterMenu(routeHasFilter);
     });
 
-    const hideFilterIcon = () => {
-        setState({ ...state, visibleLeft: !state.visibleLeft });
-    }
-
-    const hideNavSidebar = () => {
-        setState({ ...state, visibleLeft: false });
-    }
 
     return (
         <div>
@@ -24,18 +53,18 @@ const Header: React.FC = () => {
                 <div className="col-sm-12 col-lg12 col-md-12 header-block">
                     <div className="row">
                         <div className="col-sm-6 col-md-6 col-lg-6">
-                            <Sidebar id="navigationSidebar" visible={state.visibleLeft} onHide={hideNavSidebar}>
+                            <Sidebar id="navigationSidebar" visible={sideMenuVisible} onHide={toggleSideMenu}>
                                 <nav className="nav flex-column navigation">
-                                    <NavLink exact activeClassName="active" className="nav-link" to={'/dashboard'} onClick={hideNavSidebar}>
+                                    <NavLink exact activeClassName="active" className="nav-link" to={'/dashboard'} onClick={toggleSideMenu}>
                                         <i className="linecons-cog fa fa-cog"></i><span>Dashboard</span>
                                     </NavLink>
-                                    <NavLink exact activeClassName="active" className="nav-link" to={'/user-management'} onClick={hideNavSidebar}>
+                                    <NavLink exact activeClassName="active" className="nav-link" to={'/user-management'} onClick={toggleSideMenu}>
                                         <i className="linecons-cog fa fa-cog"></i><span>User Management</span>
                                     </NavLink>
                                 </nav>
                             </Sidebar>
 
-                            <Button icon="fa fa-bars" label="" onClick={hideFilterIcon}> </Button>
+                            <Button icon="fa fa-bars" label="" onClick={toggleSideMenu}> </Button>
                             <span className="logo">
                                 <a className="navbar-brand" href="/"> <img src={require("../../common/assets/images/icons/n_square.svg")} alt="logo" /></a>
                             </span>
@@ -55,7 +84,15 @@ const Header: React.FC = () => {
                     </div>
                 </div>
             </div>
-        </div>
+            {hasFilterMenu && <div id="filterSidebar" className="right-filter-block">
+                <Sidebar visible={filterMenuVisible} onHide={toggleFilterMenu}>
+                    {
+                        filterTemplate()
+                    }
+                </Sidebar>
+                {filterIconVisible && <Button icon="fa fa-filter" onClick={toggleFilterMenu} />}
+            </div>}
+        </div >
     )
 }
 

@@ -38,7 +38,7 @@ const Dashboard: React.FC = () => {
         console.log(countryName, 'countryName')
     }
     return (
-        <div>
+        <div className="container-fluid mt-90">
             <div className="container-fluid" style={{ paddingBottom: 20 }}>
                 <div className='row'>
                     <div className='col-8'>

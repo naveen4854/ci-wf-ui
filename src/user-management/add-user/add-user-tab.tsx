@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { DataTable } from 'src/shared-components';
-import Demo from './add-user-form';
+import AddNewUserForm from './add-user-form';
 
 const dummyData = [{
     id: 1,
@@ -24,28 +24,41 @@ const columns = [
 ]
 
 const AddUserTab = () => {
-
     return (
         <UsersList />
     )
 };
 
 const UsersList = () => {
-    const userSelected = (e: any) => {
-        console.log(e);
-    }
     const [visible, setVisible] = useState(false);
-    return <>
-        {visible && <Demo onClose={() => setVisible(false)} visible={visible}></Demo>}
-        <button onClick={() => setVisible(true)}>click!!</button>
-        <DataTable
-            value={dummyData} paginator={true} rows={10}
-            selectionMode="single"
-            onRowClick={userSelected}
-            emptyMessage="No Users Found"
-            columns={columns}
-        />
-    </>
+    const [selectedUser, setSelectedUser] = useState({ name: '', role: '', city: '', country: '' })
+
+    const userSelected = (e: any) => {
+        setSelectedUser(e.data);
+        setVisible(true);
+    };
+    return (
+        <div className='reports-block'>
+            <div className="reports-header">
+                <div className="row">
+                    <div className="col-sm-6 col-md-6 col-lg-6">
+                        <h2 className="title">CI-WF Users List</h2>
+                    </div>
+                </div>
+
+            </div>
+            {visible && <AddNewUserForm onClose={() => setVisible(false)} visible={visible} data={selectedUser}></AddNewUserForm>}
+            <div className="reports-table">
+                <DataTable
+                    value={dummyData} paginator={true} rows={10}
+                    selectionMode="single"
+                    onRowClick={userSelected}
+                    emptyMessage="No Users Found"
+                    columns={columns}
+                />
+            </div>
+        </div >
+    )
 }
 
 export default AddUserTab;

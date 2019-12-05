@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { DataTable } from 'src/shared-components';
+import EditUserForm from './edit-user-form';
 
 const dummyData = [{
     id: 1,
@@ -7,7 +8,7 @@ const dummyData = [{
     role: 'User',
     city: 'Chennai',
     country: 'India',
-    newColumn: true
+    newColumn: 'true'
 },
 {
     id: 2,
@@ -15,7 +16,7 @@ const dummyData = [{
     role: 'Admin',
     city: 'Delhi',
     country: 'India',
-    newColumn: false
+    newColumn: 'false'
 }]
 const columns = [
     { field: 'id', header: 'ID' },
@@ -32,16 +33,35 @@ const EditUserTab = () => {
 };
 
 const UsersList = () => {
+    const [visible, setVisible] = useState(false);
+    const [selectedUser, setSelectedUser] = useState({ name: '', role: '', city: '', country: '' });
+
     const userSelected = (e: any) => {
-        console.log(e);
+        setSelectedUser(e.data);
+        setVisible(true);
     }
-    return <DataTable
-        value={dummyData} paginator={true} rows={10}
-        selectionMode="single"
-        onRowClick={userSelected}
-        emptyMessage="No Users Found"
-        columns={columns}
-    />
+    return (
+        <div className='reports-block'>
+            <div className="reports-header">
+                <div className="row">
+                    <div className="col-sm-6 col-md-6 col-lg-6">
+                        <h2 className="title">CI-WF Users List</h2>
+                    </div>
+                </div>
+
+            </div>
+            {visible && <EditUserForm onClose={() => setVisible(false)} visible={visible} data={selectedUser}></EditUserForm>}
+            <div className="reports-table">
+                <DataTable
+                    value={dummyData} paginator={true} rows={10}
+                    selectionMode="single"
+                    onRowClick={userSelected}
+                    emptyMessage="No Users Found"
+                    columns={columns}
+                />
+            </div>
+        </div>
+    )
 }
 
 export default EditUserTab;

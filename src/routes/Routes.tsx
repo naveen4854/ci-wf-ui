@@ -11,18 +11,16 @@ const Routes = () => {
   return (
     <Router history={history}>
       <Route component={Header} />
-      <div style={{ marginTop: 50, paddingTop: 20 }}>
-        <Switch>
-          <Route exact path="/dashboard" component={Dashboard} />
-          <Route exact path="/progress-tracker" component={ProgressTracker} />
-          <Route exact path="/syncfusion-pertcart" component={SyncfusionPertchart} />
-          <Route exact path="/SvgPertchart" component={SvgPertchart} />
-          <Route exact path="/" component={Dashboard} />
-          <Route path="/user-management" component={Dashboard} >
-            <UserManagementRoutes />
-          </Route>
-        </Switch>
-      </div>
+      <Switch>
+        <Route exact path="/dashboard" component={Dashboard} />
+        <Route exact path="/progress-tracker" component={ProgressTracker} />
+        <Route exact path="/syncfusion-pertcart" component={SyncfusionPertchart} />
+        <Route exact path="/SvgPertchart" component={SvgPertchart} />
+        <Route exact path="/" component={Dashboard} />
+        <Route path="/user-management" component={Dashboard} >
+          <UserManagementRoutes />
+        </Route>
+      </Switch>
       <Route component={Footer} />
     </Router>
   )

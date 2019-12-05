@@ -56,13 +56,13 @@ h4 {
 //   padding: 0px !important;
 // }
 
-// // input.form-control,
-// // select.form-control {
-// //   height: 34px;
-// //   font-size: 14px;
-// //   color: $base-font;
-// //   border-radius: 0px;
-// // }
+input.form-control,
+select.form-control {
+  height: 34px;
+  font-size: 14px;
+  color: $base-font;
+  border-radius: 0px;
+}
 
 // /* *{
 //   border: 1px solid red;
@@ -130,11 +130,11 @@ h4 {
 //   }
 // }
 
-// .btn{
-//   border: 0px;
-//   border-radius: 0px;
-//   font-size: 13px;
-// }
+.btn{
+  border: 0px;
+  border-radius: 0px;
+  font-size: 13px;
+}
 
 // .btn-success {
 //   color: $white;
@@ -193,11 +193,7 @@ h4 {
 //   float: left;
 // }
 
-// .p-sortable-column-icon {
-//   float: right;
-//   font-size: 13px;
-//   margin-top: 2px;
-// }
+
 
 // .p-column-filter {
 //   margin-top: 20px;
@@ -229,86 +225,100 @@ h4 {
 //   box-shadow: none;
 // }
 
-// body {
-//   .p-datatable {
-//     font-size: 13px;
-//     color: #151921;
+body {
+  .p-sortable-column-icon {
+    float: right;
+    font-size: 13px;
+    margin-top: 2px;
+  }
+  .p-datatable {
+    font-size: 13px;
+    color: #151921;
+    
+    .p-column-title {
+      float: left;
+    }
 
-//     .p-datatable-thead {
-//       tr {
-//         th {
-//           padding: 10px;
-//           background: transparent;
-//           border-top: 1px solid #DDE6ED;
-//           border-right: 0px;
-//           border-bottom: 1px solid #DDE6ED;
-//           border-left: 1px solid #DDE6ED;
+    .p-sortable-column.p-highlight .p-sortable-column-icon {
+      color: #151921;
+      box-shadow: none;
+    }
+    
+    .p-datatable-thead {
+      tr {
+        th {
+          padding: 10px;
+          background: transparent;
+          border-top: 1px solid #DDE6ED;
+          border-right: 0px;
+          border-bottom: 1px solid #DDE6ED;
+          border-left: 1px solid #DDE6ED;
 
-//           &:first-child{
-//             border-left: 0px;
-//           }
+          &:first-child{
+            border-left: 0px;
+          }
 
-//           &.p-sortable-column{
-//           }
-//         }
-//       }
-//     }
+          &.p-sortable-column{
+          }
+        }
+      }
+    }
 
-//     .p-datatable-tbody{
-//       tr {
-//         &:last-child{
-//           border-bottom: 1px solid #DDE6ED;
-//         }
+    .p-datatable-tbody{
+      tr {
+        &:last-child{
+          border-bottom: 1px solid #DDE6ED;
+        }
 
-//         &:hover{
-//           background: #DDE6ED;
-//         }
-//         td{
+        &:hover{
+          background: #DDE6ED;
+        }
+        td{
 
-//           border-top: 0px;
-//           border-right: 0px;
-//           border-bottom: 0px;
-//           border-left: 1px solid #DDE6ED;
-//           padding: 10px;
+          border-top: 0px;
+          border-right: 0px;
+          border-bottom: 0px;
+          border-left: 1px solid #DDE6ED;
+          padding: 10px;
 
-//           &:first-child{
-//             border-left: 0px;
-//           }
+          &:first-child{
+            border-left: 0px;
+          }
 
-//         }
-//       }
-//     }
+        }
+      }
+    }
 
-//     .p-datatable-tbody>tr:nth-child(odd) {
-//       background-color: #F5F9FC;
-//     }
-//     .p-datatable-tbody>tr:nth-child(even) {
-//       background-color: $white;
-//     }
-//   }
+    .p-datatable-tbody>tr:nth-child(odd) {
+      background-color: #F5F9FC;
+    }
+    .p-datatable-tbody>tr:nth-child(even) {
+      background-color: $white;
+    }
+  }
 
-//   .p-inputtext {
-//     border-radius: 0px;
-//   }
+  .p-inputtext {
+    border-radius: 0px;
+  }
 
-//   .p-paginator {
-//     background: transparent;
-//     border: 0px;
-//     float: right;
-//     margin-top: 15px;
+  .p-paginator {
+    background: transparent;
+    border: 0px;
+    float: right;
+    margin-top: 15px;
 
-//     .p-paginator-pages{
-//       button.p-paginator-page {
-//           font-size: 13px !important;
-//           box-shadow: none !important
-//       }
-//       .p-highlight{
-//         background-color: $light-blue !important;
-//         }
+    .p-paginator-pages{
+      button.p-paginator-page {
+          font-size: 13px !important;
+          box-shadow: none !important
+      }
+      .p-highlight{
+        background-color: $light-blue !important;
+        }
 
-//     }
-//   }
-// }
+    }
+  }
+}
 
 // .asterisk{
 //   color: $asterisk_color;

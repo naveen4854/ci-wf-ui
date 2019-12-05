@@ -14,7 +14,7 @@ interface AddUserFormProps {
     }
 }
 
-const AddNewUserForm: React.FC<AddUserFormProps> = (props) => {
+const EditUserForm: React.FC<AddUserFormProps> = (props) => {
     const [visible, setVisible] = useState(false);
     const [user, setUser] = useState({ name: '', role: '', city: '', country: '' });
 
@@ -79,8 +79,7 @@ const AddNewUserForm: React.FC<AddUserFormProps> = (props) => {
                 </table>
             </div>
         </Dialog>
-
     )
 }
 
-export default AddNewUserForm;
+export default EditUserForm;
