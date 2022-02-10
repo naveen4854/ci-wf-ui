@@ -24,7 +24,7 @@
     "d3-geo-projection": "^2.7.0",
     "font-awesome": "^4.7.0",
     "history": "^4.10.1",
-    "node-sass": "^4.13.0",
+    "node-sass": "^7.0.0",
     "primeicons": "^2.0.0",
     "primereact": "^3.3.3",
     "react": "^16.11.0",
